@@ -1,9 +1,11 @@
-from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
-from types import TracebackType
-from Event import Event
-from parse.match import parse_period
-from functionality.create_event_type import create_event_type
+import discord
 
+from src.functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
+from types import TracebackType
+from src.Event import Event
+from src.parse.match import parse_period
+from src.functionality.create_event_type import create_event_type
+from src.functionality.AddEvent import check_complete
 from src.parse.match import parse_period24
 
 
@@ -17,7 +19,7 @@ def check_complete(start, start_date, end, end_date, array):
         return False
 
 
-async def add_event(ctx, client):
+async def add_event2(ctx, client):
     """
     Function:
         add_event
@@ -49,6 +51,8 @@ async def add_event(ctx, client):
         + "Or mm/dd/yy hh:mm mm/dd/yy hh:mm (24-hour formatting)"
 
     )
+    if event_msg == "exit" or event_msg == "quit":
+        return None
 
     event_dates = False
     # A loop that keeps running until a user enters correct start and end dates for their event following the required format
@@ -63,9 +67,11 @@ async def add_event(ctx, client):
             event_msg = await client.wait_for("message", check=check)
             # Strips message to just the text the user entered
             msg_content = event_msg.content
-
-        #print(" yesa  " + str(msg_content))
-        if msg_content.__contains__("am") or msg_content.__contains__("pm") or msg_content.__contains__("AM") or msg_content.__contains__("PM"):
+        if event_msg == "exit" or event_msg == "quit":
+            return None
+        # print(" yesa  " + str(msg_content))
+        if msg_content.__contains__("am") or msg_content.__contains__("pm") or msg_content.__contains__ \
+                ("AM") or msg_content.__contains__("PM"):
             try:
                 parse_result = parse_period(msg_content)
             except Exception as e:
@@ -81,7 +87,7 @@ async def add_event(ctx, client):
 
             start_complete = True
 
-            #print("Lets see for 12 hr it now " + str(parse_result))
+            # print("Lets see for 12 hr it now " + str(parse_result))
 
             start_date = parse_result[0]
             end_date = parse_result[1]
@@ -96,6 +102,8 @@ async def add_event(ctx, client):
                 msg_content = ""
 
         # 24hr format
+        elif  msg_content.__contains__("exit") or  msg_content.__contains__("quit"):
+            return None
         else:
             try:
                 parse_result = parse_period24(msg_content)
@@ -112,7 +120,7 @@ async def add_event(ctx, client):
 
             start_complete = True
 
-            #print("Lets see it now " + str(parse_result))
+            # print("Lets see it now " + str(parse_result))
             start_date = parse_result[0]
             end_date = parse_result[1]
 
@@ -160,13 +168,17 @@ async def add_event(ctx, client):
     )
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
+    if event_msg == "exit" or event_msg == "quit":
+        return None
     await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
     event_array.append(event_msg)
     await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
+    if event_msg == "exit" or event_msg == "quit":
+        return None
     if event_msg.lower() == "done":
-        event_array.append("")
+        event_array.append("-")
     else:
         event_array.append(event_msg)
 
@@ -184,3 +196,44 @@ async def add_event(ctx, client):
             "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
         )
 
+    return event_array
+
+async def group_event(ctx, client, user, emoji):
+    arr = await add_event2(ctx, client)
+    em = discord.Embed(
+        title="Group Event Created!",
+        description="If you would Like to be notified of this event, please click on the 📅",
+    )
+    em.add_field(name="Name", value=str(arr[0]), inline=False)
+    em.add_field(name="Start", value=str(arr[1]), inline=False)
+    em.add_field(name="End", value=str(arr[2]), inline=False)
+    em.add_field(name="Priority", value=str(arr[3]), inline=True)
+    em.add_field(name="Type", value=str(arr[4]), inline=True)
+    em.add_field(name="Additional Info", value=str(arr[5]), inline=False)
+
+    for guild in client.guilds:
+        temp = await guild.fetch_member(ctx.author.id)
+        if temp is not None:
+            for channel in guild.text_channels:
+                if channel.name == "general":
+                    msg = await channel.send(embed=em)
+                    await msg.add_reaction(emoji)
+
+    return arr
+
+
+async def add_others_event(user, event_array):
+    create_type_tree(str(id))
+    # Tries to create an Event object from the user input
+    try:
+        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5])
+        await user.send("Your event was successfully created!")
+        create_event_tree(str(user.id))
+        add_event_to_file(str(user.id), current)
+    except Exception as e:
+        # Outputs an error message if the event could not be created
+        print(e)
+        TracebackType.print_exc()
+        await user.send(
+            "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
+        )
