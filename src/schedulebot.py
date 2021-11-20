@@ -13,6 +13,12 @@ from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
 from functionality.export_file import export_file
 from functionality.import_file import import_file
+from functionality.edit_event import edit_event
+from functionality.group_event import group_event, add_others_event
+
+global groupEvent
+global emojiArray
+global emojiCounter
 from functionality.DeleteEvent import delete_event
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
@@ -108,6 +114,23 @@ async def on_reaction_add(reaction, user):
             print(user.name + " (" + user.id + ") does not have DM permissions set correctly")
             pass
 
+    global groupEvent
+    global emojiArray
+    counter = 0
+    for i in emojiArray:
+        if emoji == i and not user.bot:
+            try:
+                await add_others_event(user, groupEvent[counter])
+                await user.send(
+                    "Hey "
+                    + user.name
+                    + "! I have created the Event that you reacted to! "
+                )
+
+            except:
+                print(user.name + " (" + user.id + ") does not have DM permissions set correctly")
+                pass
+        counter += 1
 
 @bot.command()
 async def schedule(ctx):
@@ -214,6 +237,21 @@ async def typecreate(ctx):
 async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
+# @bot.command()
+# async def editevent(ctx):
+#     await edit_event(ctx, bot)
+
+@bot.command()
+async def groupevent(ctx):
+    global groupEvent
+    global emojiCounter
+
+    temp = await group_event(ctx, bot, ctx.author, emojiArray[emojiCounter])
+    if temp is not None:
+        groupEvent[emojiCounter] = temp
+        emojiCounter += 1
+        if emojiCounter == len(emojiArray):
+            emojiCounter = 0
 
 @bot.command()
 async def freetime(ctx):
@@ -232,7 +270,12 @@ async def freetime(ctx):
 # Runs the bot (local machine)
 if __name__ == "__main__":
     from config import TOKEN
-
+    global emojiArray
+    global emojiCounter
+    global groupEvent
+    emojiArray = ["📅", "➕", "✔", "📌", "📢"]
+    emojiCounter = 0
+    groupEvent = [None, None, None, None, None]
     bot.run(TOKEN)
 
 # client.run(os.environ['TOKEN'])  # Runs the bot (repl.it)
