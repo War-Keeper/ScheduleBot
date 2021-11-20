@@ -229,6 +229,43 @@ def add_event_to_file(user_id, current):
     key = load_key(user_id)
     encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
 
+def delete_event_from_file(user_id, to_remove):
+    rows = read_event_file(user_id)
+    typeRows = read_type_file(user_id)
+    print("Rowns: "+rows.__str__())
+
+    for row in rows:
+        if to_remove['name'] == row[1]:
+            rows.remove(row)
+
+    for type_row in typeRows:
+        print("Type Row "+type_row.__str__())
+        if to_remove['desc'] == str(type_row[0]):
+            typeRows.remove(type_row)
+
+    # Open current user's calendar file for writing
+    with open(
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
+            "w",
+            newline="",
+    ) as calendar_file:
+        # Write to column headers and array of rows back to the calendar file
+        csvwriter = csv.writer(calendar_file)
+        csvwriter.writerows(rows)
+
+    key = load_key(user_id)
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+
+    with open(
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv",
+            "w",
+            newline="",
+    ) as new_file:
+        csvwriter = csv.writer(new_file, delimiter=",")
+        csvwriter.writerows(typeRows)
+
+    key = check_key(user_id)
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
 
 
 def create_key_directory():

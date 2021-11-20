@@ -13,6 +13,7 @@ from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
 from functionality.export_file import export_file
 from functionality.import_file import import_file
+from functionality.DeleteEvent import delete_event
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -122,6 +123,10 @@ async def schedule(ctx):
         - A message sent to the context saying an event was successfully created
     """
     await add_event(ctx, bot)
+
+@bot.command()
+async def deleteevent(ctx):
+    await delete_event(ctx, bot)
 
 
 @bot.command()
