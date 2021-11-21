@@ -61,10 +61,15 @@ async def edit_event(ctx, client):
     #delete the event and event type
     if not eventFlag:
         await channel.send("Please enter the name of the event you want to edit")
-        event_msg = await client.wait_for("message", check=check)  # Waits for user input
-        event_msg = event_msg.content  # Strips message to just the text the user entered
-        event = next((item for item in events if item["name"] == event_msg), None)
-        send_event_info(ctx, event)
+        event = None
+        while event == None:
+            event_msg = await client.wait_for("message", check=check)  # Waits for user input
+            event_msg = event_msg.content  # Strips message to just the text the user entered
+            if event_msg == 'exitupdate':
+                break
+            event = next((item for item in events if item["name"] == event_msg), None)
+            if event == None:
+                await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
 
 
 async def send_event_info(ctx, event):
