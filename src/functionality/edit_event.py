@@ -24,4 +24,31 @@ async def edit_event(ctx, bot):
     create_event_tree(str(ctx.author.id))
     rows = read_event_file(str(ctx.author.id))
     
+    # Initialize variables
+    channel = await ctx.author.create_dm()
+    event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
+    events = []
+    eventFlag = False
+    
+    # If there are events in the file
+    if len(rows) > 1:
+        # For every row in calendar file
+        for row in rows[1:]:
+            # Get event details
+            event['name'] = row[1]
+            start = row[2].split()
+            event['startDate'] = start[0]
+            event['startTime'] = convert_to_12(start[1][:-3])  # Convert to 12 hour format
+            end = row[3].split()
+            event['endDate'] = end[0]
+            event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
+            event['type'] = row[4]
+            event['desc'] = row[5]
+            #dates = [event['startDate'], event['endDate']]
+
+            events.append(event)
+
+            # reset event
+            event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
+    
 
