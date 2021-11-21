@@ -237,9 +237,9 @@ async def typecreate(ctx):
 async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
-# @bot.command()
-# async def editevent(ctx):
-#     await edit_event(ctx, bot)
+@bot.command()
+async def editevent(ctx):
+    await edit_event(ctx, bot)
 
 @bot.command()
 async def groupevent(ctx):
