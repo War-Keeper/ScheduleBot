@@ -44,11 +44,22 @@ async def edit_event(ctx, bot):
             event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['type'] = row[4]
             event['desc'] = row[5]
-            #dates = [event['startDate'], event['endDate']]
 
             events.append(event)
-
+            
+            embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
+                                      title="Your Schedule:")
+            embed.set_footer(text=f"Requested by {ctx.author}")
+            embed.add_field(name="Event Name:", value=event['name'], inline=False)
+            embed.add_field(name="Start Time:", value=event['startTime'], inline=True)
+            embed.add_field(name="End Time:", value=event['endTime'], inline=True)
+            embed.add_field(name="Event Type:", value=event['type'], inline=False)
+            embed.add_field(name="Description:", value=event['desc'], inline=False)
+            await ctx.send(embed=embed)
+            
             # reset event
             event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
-    
-
+            
+    else:
+        eventFlag = True
+        await channel.send("Looks like your schedule is empty. You can add events using the '!schedule' command!")
