@@ -7,6 +7,17 @@ from src.functionality.shared_functions import read_event_file, create_event_tre
 from src.functionality.highlights import convert_to_12
 
 async def delete_event(ctx, client):
+    """
+    Function:
+        delete_event
+    Description:
+        A existing event is deleted from the user's schedule file
+    Input:
+        ctx: the current context
+        client: the instance of the bot
+    Output:
+        - A reply saying whether the event was deleted or not
+    """
 
     channel = await ctx.author.create_dm()
 
@@ -44,6 +55,7 @@ async def delete_event(ctx, client):
             # reset event
             event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
 
+        #find all the existing schedules and display them
         if len(events) != 0:
             for e in events:
                 embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
@@ -62,6 +74,7 @@ async def delete_event(ctx, client):
         eventFlag = True
         await channel.send("Looks like your schedule is empty. You can add events using the '!schedule' command!")
 
+    #delete the event and event type
     if not eventFlag:
         await channel.send("Please enter the name of the event you want to delete")
         event_msg = await client.wait_for("message", check=check)  # Waits for user input
