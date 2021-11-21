@@ -69,24 +69,45 @@ async def edit_event(ctx, client):
     #delete the event and event type
     if not eventFlag:
         await channel.send("Please enter the name of the event you want to edit")
-        event = None
-        while event == None:
+        selected_event = None
+        while selected_event == None:
             event_msg = await client.wait_for("message", check=check)  # Waits for user input
             event_msg = event_msg.content  # Strips message to just the text the user entered
             if event_msg == 'exitupdate':
                 break
-            event = next((item for item in events if item["name"] == event_msg), None)
-            if event == None:
+            selected_event = next((item for item in events if item["name"] == event_msg), None)
+            if selected_event == None:
                 await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
-        if event:
-            attribute_selection_message = "Please enter any of the following number:\n1 to update name\n2 to update start date & time\n3 to update end date & time\n4 to update description\n5 to update type"
-            await channel.send(attribute_selection_message)
-            attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
-            attribute_to_update = attribute_to_update.content
-            while not attribute_to_update.isnumeric() or int(attribute_to_update)<1 or int(attribute_to_update)>5:
-                await channel.send("Looks like you entered invalid attribute number. Please enter a valid attribute number for update or exit by entering 'exitupdate'\n" + attribute_selection_message)
-                attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
-                attribute_to_update = attribute_to_update.content  # Strips message to just the text the user entered
-                if attribute_to_update == 'exitupdate':
-                    break
-            print(attribute_to_update)
+        if selected_event:
+            updated_event = await channel.send("Please enter the updated event information in following format:\n" + str(selected_event))
+            print(updated_event.content)
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+# attribute_selection_message = "Please enter any of the following number:\n1 to update name\n2 to update start date & time\n3 to update end date & time\n4 to update description\n5 to update type"
+# await channel.send(attribute_selection_message)
+# attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
+# attribute_to_update = attribute_to_update.content
+# invalid_attribute = False
+# while not attribute_to_update.isnumeric() or int(attribute_to_update)<1 or int(attribute_to_update)>5:
+#     await channel.send("Looks like you entered invalid attribute number. Please enter a valid attribute number for update or exit by entering 'exitupdate'\n" + attribute_selection_message)
+#     attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
+#     attribute_to_update = attribute_to_update.content  # Strips message to just the text the user entered
+#     if attribute_to_update == 'exitupdate':
+#         break
+
+# if attribute_to_update == '1':
+#     await channel.send("Please enter new name for the selected event")
+#     new_name = await client.wait_for("message", check=check)
+#     new_name = attribute_to_update.content
+        
