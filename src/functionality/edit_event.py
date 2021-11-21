@@ -20,5 +20,8 @@ async def edit_event(ctx, bot):
     """
 
     channel = await ctx.author.create_dm()
+    # Open and read user's calendar file
+    create_event_tree(str(ctx.author.id))
+    rows = read_event_file(str(ctx.author.id))
     
 
