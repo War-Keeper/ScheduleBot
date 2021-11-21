@@ -6,7 +6,7 @@ from discord.ext import commands
 from src.functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file
 from src.functionality.highlights import convert_to_12
 
-async def edit_event(ctx, bot):
+async def edit_event(ctx, client):
     """
     Function:
         edit_event
@@ -49,15 +49,7 @@ async def edit_event(ctx, bot):
 
             events.append(event)
             
-            embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
-                                      title="Your Schedule:")
-            embed.set_footer(text=f"Requested by {ctx.author}")
-            embed.add_field(name="Event Name:", value=event['name'], inline=False)
-            embed.add_field(name="Start Time:", value=event['startTime'], inline=True)
-            embed.add_field(name="End Time:", value=event['endTime'], inline=True)
-            embed.add_field(name="Event Type:", value=event['type'], inline=False)
-            embed.add_field(name="Description:", value=event['desc'], inline=False)
-            await ctx.send(embed=embed)
+            
             
             # reset event
             event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
@@ -66,4 +58,21 @@ async def edit_event(ctx, bot):
         eventFlag = True
         await channel.send("Looks like your schedule is empty. You can add events using the '!schedule' command!")
     
-    
+    #delete the event and event type
+    if not eventFlag:
+        await channel.send("Please enter the name of the event you want to edit")
+        event_msg = await client.wait_for("message", check=check)  # Waits for user input
+        event_msg = event_msg.content  # Strips message to just the text the user entered
+        next((item for item in events if item["name"] == event_msg), None)
+
+
+async def send_event_info(ctx, event):
+    embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
+                                      title="Your Schedule:")
+    embed.set_footer(text=f"Requested by {ctx.author}")
+    embed.add_field(name="Event Name:", value=event['name'], inline=False)
+    embed.add_field(name="Start Time:", value=event['startTime'], inline=True)
+    embed.add_field(name="End Time:", value=event['endTime'], inline=True)
+    embed.add_field(name="Event Type:", value=event['type'], inline=False)
+    embed.add_field(name="Description:", value=event['desc'], inline=False)
+    await ctx.send(embed=embed)          
