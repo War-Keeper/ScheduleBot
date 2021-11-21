@@ -77,15 +77,16 @@ async def edit_event(ctx, client):
                                "4 to update end date & time" +
                                "6 to update description" +
                                "7 to update type")
-        event = None
-        while event == None:
-            event_msg = await client.wait_for("message", check=check)  # Waits for user input
-            event_msg = event_msg.content  # Strips message to just the text the user entered
-            if event_msg == 'exitupdate':
-                break
-            event = next((item for item in events if item["name"] == event_msg), None)
-            if event == None:
-                await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
+            attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
+            attribute_to_update = attribute_to_update.content
+            while attribute_to_update.isnumeric() or int(attribute_to_update)<1 or int(attribute_to_update)>7:
+                await channel.send("Looks like you entered invalid attribute number. Please enter a valid attribute number for update or exit by entering 'exitupdate'")
+                attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
+                attribute_to_update = attribute_to_update.content  # Strips message to just the text the user entered
+                if attribute_to_update == 'exitupdate':
+                    break
+            print(attribute_to_update)    
+                
 
 async def send_event_info(ctx, event):
     embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
