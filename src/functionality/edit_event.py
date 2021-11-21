@@ -5,6 +5,7 @@ from discord import Client
 from discord.ext import commands
 from src.functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file
 from src.functionality.highlights import convert_to_12
+import json
 
 async def edit_event(ctx, client):
     """
@@ -79,9 +80,16 @@ async def edit_event(ctx, client):
             if selected_event == None:
                 await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
         if selected_event:
-            updated_event = await channel.send("Please enter the updated event information in following format:\n" + str(selected_event))
-            print(updated_event.content)
-            
+            valid_update = False
+            await channel.send("Please enter the updated event information in following format:\n" + json.dumps(selected_event))
+            while not valid_update:
+                try:
+                    updated_event = await client.wait_for("message", check=check)  # Waits for user input
+                    updated_event = updated_event.content  # Strips message to just the text the user entered
+                    print(json.loads(updated_event.content))
+                    valid_update = True
+                except ValueError:
+                    await channel.send("Please enter valid updated event information in following format:\n" + json.dumps(selected_event))
             
             
             
