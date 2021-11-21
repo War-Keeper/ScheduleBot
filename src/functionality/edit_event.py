@@ -49,7 +49,15 @@ async def edit_event(ctx, client):
             events.append(event)
             
             # send event information to user
-            send_event_info(event)
+            embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
+                                      title="Your Schedule:")
+            embed.set_footer(text=f"Requested by {ctx.author}")
+            embed.add_field(name="Event Name:", value=event['name'], inline=False)
+            embed.add_field(name="Start Time:", value=event['startTime'], inline=True)
+            embed.add_field(name="End Time:", value=event['endTime'], inline=True)
+            embed.add_field(name="Event Type:", value=event['type'], inline=False)
+            embed.add_field(name="Description:", value=event['desc'], inline=False)
+            await ctx.send(embed=embed)    
             
             # reset event dict
             event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
@@ -71,30 +79,14 @@ async def edit_event(ctx, client):
             if event == None:
                 await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
         if event:
-            await channel.send("Please enter any of the following number:" +
-                               "1 to update name" +
-                               "2 to update start date & time" +
-                               "4 to update end date & time" +
-                               "6 to update description" +
-                               "7 to update type")
+            attribute_selection_message = "Please enter any of the following number:\n1 to update name\n2 to update start date & time\n3 to update end date & time\n4 to update description\n5 to update type"
+            await channel.send(attribute_selection_message)
             attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
             attribute_to_update = attribute_to_update.content
-            while attribute_to_update.isnumeric() or int(attribute_to_update)<1 or int(attribute_to_update)>7:
-                await channel.send("Looks like you entered invalid attribute number. Please enter a valid attribute number for update or exit by entering 'exitupdate'")
+            while not attribute_to_update.isnumeric() or int(attribute_to_update)<1 or int(attribute_to_update)>5:
+                await channel.send("Looks like you entered invalid attribute number. Please enter a valid attribute number for update or exit by entering 'exitupdate'\n" + attribute_selection_message)
                 attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
                 attribute_to_update = attribute_to_update.content  # Strips message to just the text the user entered
                 if attribute_to_update == 'exitupdate':
                     break
-            print(attribute_to_update)    
-                
-
-async def send_event_info(ctx, event):
-    embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
-                                      title="Your Schedule:")
-    embed.set_footer(text=f"Requested by {ctx.author}")
-    embed.add_field(name="Event Name:", value=event['name'], inline=False)
-    embed.add_field(name="Start Time:", value=event['startTime'], inline=True)
-    embed.add_field(name="End Time:", value=event['endTime'], inline=True)
-    embed.add_field(name="Event Type:", value=event['type'], inline=False)
-    embed.add_field(name="Description:", value=event['desc'], inline=False)
-    await ctx.send(embed=embed)          
+            print(attribute_to_update)
