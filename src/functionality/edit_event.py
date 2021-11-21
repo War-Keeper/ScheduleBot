@@ -81,15 +81,22 @@ async def edit_event(ctx, client):
                 await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
         if selected_event:
             valid_update = False
-            await channel.send("Please enter the updated event information in following format:\n" + json.dumps(selected_event))
+            await channel.send("Please enter the updated event information in following format:\n" + json.dumps(selected_event) + "\nor enter exit update to exit")
             while not valid_update:
                 try:
                     updated_event = await client.wait_for("message", check=check)  # Waits for user input
                     updated_event = updated_event.content  # Strips message to just the text the user entered
-                    print(json.loads(updated_event.content))
+                    if updated_event == 'exitupdate':
+                        break
+                    updated_event = json.loads(updated_event)
+                    print(events)
+                    events.remove(selected_event)
+                    events.append(updated_event)
+                    print(events)
                     valid_update = True
                 except ValueError:
-                    await channel.send("Please enter valid updated event information in following format:\n" + json.dumps(selected_event))
+                    await channel.send("Please enter valid updated event information in following format:\n" + json.dumps(selected_event) + "\nor enter 'exitupdate' to exit")
+            
             
             
             
