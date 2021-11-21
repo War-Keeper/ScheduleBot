@@ -18,7 +18,9 @@ async def edit_event(ctx, bot):
     Output:
         - A reply saying whether the event was updated or not
     """
-
+    def check(m):
+        return m.content is not None and m.channel == channel and m.author == ctx.author
+    
     channel = await ctx.author.create_dm()
     # Open and read user's calendar file
     create_event_tree(str(ctx.author.id))
@@ -63,3 +65,5 @@ async def edit_event(ctx, bot):
     else:
         eventFlag = True
         await channel.send("Looks like your schedule is empty. You can add events using the '!schedule' command!")
+    
+    
