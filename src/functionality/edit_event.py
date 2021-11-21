@@ -46,12 +46,12 @@ async def edit_event(ctx, client):
             event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['type'] = row[4]
             event['desc'] = row[5]
-
             events.append(event)
             
+            # send event information to user
+            send_event_info(event)
             
-            
-            # reset event
+            # reset event dict
             event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
             
     else:
@@ -63,7 +63,8 @@ async def edit_event(ctx, client):
         await channel.send("Please enter the name of the event you want to edit")
         event_msg = await client.wait_for("message", check=check)  # Waits for user input
         event_msg = event_msg.content  # Strips message to just the text the user entered
-        next((item for item in events if item["name"] == event_msg), None)
+        event = next((item for item in events if item["name"] == event_msg), None)
+        send_event_info(ctx, event)
 
 
 async def send_event_info(ctx, event):
