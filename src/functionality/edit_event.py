@@ -70,7 +70,22 @@ async def edit_event(ctx, client):
             event = next((item for item in events if item["name"] == event_msg), None)
             if event == None:
                 await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
-
+        if event:
+            await channel.send("Please enter any of the following number:" +
+                               "1 to update name" +
+                               "2 to update start date & time" +
+                               "4 to update end date & time" +
+                               "6 to update description" +
+                               "7 to update type")
+        event = None
+        while event == None:
+            event_msg = await client.wait_for("message", check=check)  # Waits for user input
+            event_msg = event_msg.content  # Strips message to just the text the user entered
+            if event_msg == 'exitupdate':
+                break
+            event = next((item for item in events if item["name"] == event_msg), None)
+            if event == None:
+                await channel.send("Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering 'exitupdate'")
 
 async def send_event_info(ctx, event):
     embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
