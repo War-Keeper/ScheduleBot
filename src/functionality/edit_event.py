@@ -49,7 +49,7 @@ async def edit_event(ctx, client):
             events.append(event)
             
             # send event information to user
-            embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
+            embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at, title="Event from your schedule:")
             embed.set_footer(text=f"Requested by {ctx.author}")
             if event['name']:
                 embed.add_field(name="Event Name:", value=event['name'], inline=False)
