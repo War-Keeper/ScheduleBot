@@ -81,15 +81,17 @@ async def edit_event(ctx, client):
             event_msg = await client.wait_for("message", check=check)  # Waits for user input
             event_msg = event_msg.content  # Strips message to just the text the user entered
             if event_msg.lower() == 'exitupdate':
+                embed = discord.Embed(description="`!editevent` command exited successfully!", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
+                await ctx.send(embed=embed) 
                 break
             selected_event = next((item for item in events if item["name"] == event_msg), None)
             if selected_event == None:
-                embed = discord.Embed(description="Looks like you entered event name that does not exists in our record. Please enter a valid event name or exit by entering `exitupdate`", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
+                embed = discord.Embed(description="Looks like you entered event name that does not exists in your schedule. Please enter a valid event name or exit by entering `exitupdate`", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                 await ctx.send(embed=embed)
                 
         if selected_event:
             valid_update = False
-            embed = discord.Embed(description="Please enter the updated event information in following format:\n`" + json.dumps(selected_event) + "`\nor enter exit update to exit", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
+            embed = discord.Embed(description="Please enter the updated event information in following format:\n\n`" + json.dumps(selected_event) + "`\n\nor enter `exitupdate` to exit update", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
             await ctx.send(embed=embed)
             while not valid_update:
                 try:
@@ -102,11 +104,13 @@ async def edit_event(ctx, client):
                     events.append(updated_event)
                     valid_update = True
                 except ValueError:
-                    embed = discord.Embed(description="Please enter valid updated event information in following format:\n`" + json.dumps(selected_event) + "`\nor enter exit update to exit", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
+                    embed = discord.Embed(description="Please enter valid updated event information in following format:\n\n`" + json.dumps(selected_event) + "`\n\nor enter `exitupdate` to exit update", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                     await ctx.send(embed=embed)
             if valid_update:
                 updated_event = Event(updated_event['name'], datetime.datetime.strptime(updated_event['startDateTime'], '%Y-%m-%d %H:%M:%S'),  datetime.datetime.strptime(updated_event['endDateTime'], '%Y-%m-%d %H:%M:%S'), updated_event['priority'], updated_event['type'], updated_event['notes'])
                 update_event_from_file(str(ctx.author.id), selected_event, updated_event)
+                embed = discord.Embed(description="Event `" + updated_event['name'] + "` updated successfully!", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
+                await ctx.send(embed=embed)
             else:
                 embed = discord.Embed(description="`!editevent` command exited successfully!", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                 await ctx.send(embed=embed)    
