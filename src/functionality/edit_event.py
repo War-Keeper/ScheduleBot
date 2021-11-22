@@ -29,7 +29,7 @@ async def edit_event(ctx, client):
     
     # Initialize variables
     channel = await ctx.author.create_dm()
-    event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
+    event = {'name': '', 'startDateTime': '', 'endDateTime': '', 'type': '', 'desc': ''}
     events = []
     eventFlag = False
     
@@ -39,12 +39,12 @@ async def edit_event(ctx, client):
         for row in rows[1:]:
             # Get event details
             event['name'] = row[1]
-            start = row[2].split()
-            event['startDate'] = start[0]
-            event['startTime'] = convert_to_12(start[1][:-3])  # Convert to 12 hour format
-            end = row[3].split()
-            event['endDate'] = end[0]
-            event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
+            # start = row[2].split()
+            event['startDateTime'] = datetime.datetime.strptime(row[2], '%Y-%m-%d %H:%M:%S')
+            # event['startTime'] = convert_to_12(start[1][:-3])  # Convert to 12 hour format
+            # end = row[3].split()
+            event['endDateTime'] = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S')
+            # event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['type'] = row[4]
             event['desc'] = row[5]
             events.append(event)
@@ -54,14 +54,14 @@ async def edit_event(ctx, client):
                                       title="Your Schedule:")
             embed.set_footer(text=f"Requested by {ctx.author}")
             embed.add_field(name="Event Name:", value=event['name'], inline=False)
-            embed.add_field(name="Start Time:", value=event['startTime'], inline=True)
-            embed.add_field(name="End Time:", value=event['endTime'], inline=True)
+            embed.add_field(name="Start Date & Time:", value=event['startDateTime'], inline=True)
+            embed.add_field(name="End Date & Time:", value=event['endDateTime'], inline=True)
             embed.add_field(name="Event Type:", value=event['type'], inline=False)
             embed.add_field(name="Description:", value=event['desc'], inline=False)
             await ctx.send(embed=embed)    
             
             # reset event dict
-            event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
+            event = {'name': '', 'startDateTime': '', 'endDateTime': '', 'type': '', 'desc': ''}
             
     else:
         eventFlag = True
