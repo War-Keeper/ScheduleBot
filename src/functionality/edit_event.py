@@ -40,18 +40,14 @@ async def edit_event(ctx, client):
         for row in rows[1:]:
             # Get event details
             event['name'] = row[1]
-            # start = row[2].split()
             event['startDateTime'] = row[2]
-            # event['startTime'] = convert_to_12(start[1][:-3])  # Convert to 12 hour format
-            # end = row[3].split()
             event['endDateTime'] = row[3]
-            # event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['priority'] = row[4]
             event['type'] = row[5]
             event['notes'] = row[6]
             
-                
             events.append(event)
+            
             # send event information to user
             embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
                                       title="Your Schedule:")
@@ -106,31 +102,3 @@ async def edit_event(ctx, client):
                     await channel.send("Please enter valid updated event information in following format:\n" + json.dumps(selected_event) + "\nor enter 'exitupdate' to exit")
             updated_event = Event(updated_event['name'], datetime.datetime.strptime(updated_event['startDateTime'], '%Y-%m-%d %H:%M:%S'),  datetime.datetime.strptime(updated_event['endDateTime'], '%Y-%m-%d %H:%M:%S'), updated_event['priority'], updated_event['type'], updated_event['notes'])
             update_event_from_file(str(ctx.author.id), selected_event, updated_event)
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-# attribute_selection_message = "Please enter any of the following number:\n1 to update name\n2 to update start date & time\n3 to update end date & time\n4 to update description\n5 to update type"
-# await channel.send(attribute_selection_message)
-# attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
-# attribute_to_update = attribute_to_update.content
-# invalid_attribute = False
-# while not attribute_to_update.isnumeric() or int(attribute_to_update)<1 or int(attribute_to_update)>5:
-#     await channel.send("Looks like you entered invalid attribute number. Please enter a valid attribute number for update or exit by entering 'exitupdate'\n" + attribute_selection_message)
-#     attribute_to_update = await client.wait_for("message", check=check)  # Waits for user input
-#     attribute_to_update = attribute_to_update.content  # Strips message to just the text the user entered
-#     if attribute_to_update == 'exitupdate':
-#         break
-
-# if attribute_to_update == '1':
-#     await channel.send("Please enter new name for the selected event")
-#     new_name = await client.wait_for("message", check=check)
-#     new_name = attribute_to_update.content
-        
