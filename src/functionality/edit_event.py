@@ -3,7 +3,8 @@ import datetime
 import discord
 from discord import Client
 from discord.ext import commands
-from src.functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file
+from src.Event import Event
+from src.functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file, update_event_from_file
 from src.functionality.highlights import convert_to_12
 import json
 
@@ -29,7 +30,7 @@ async def edit_event(ctx, client):
     
     # Initialize variables
     channel = await ctx.author.create_dm()
-    event = {'name': '', 'startDateTime': '', 'endDateTime': '', 'type': '', 'desc': ''}
+    event = {'name': '', 'startDateTime': '', 'endDateTime': '', 'priority': '', 'type': '', 'notes': ''}
     events = []
     eventFlag = False
     
@@ -45,23 +46,33 @@ async def edit_event(ctx, client):
             # end = row[3].split()
             event['endDateTime'] = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S')
             # event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
-            event['type'] = row[4]
-            event['desc'] = row[5]
-            events.append(event)
+            event['priority'] = row[4]
+            event['type'] = row[5]
+            event['notes'] = row[6]
             
+                
+            events.append(event)
+            print(events)
             # send event information to user
             embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
                                       title="Your Schedule:")
             embed.set_footer(text=f"Requested by {ctx.author}")
-            embed.add_field(name="Event Name:", value=event['name'], inline=False)
-            embed.add_field(name="Start Date & Time:", value=event['startDateTime'], inline=True)
-            embed.add_field(name="End Date & Time:", value=event['endDateTime'], inline=True)
-            embed.add_field(name="Event Type:", value=event['type'], inline=False)
-            embed.add_field(name="Description:", value=event['desc'], inline=False)
+            if event['name']:
+                embed.add_field(name="Event Name:", value=event['name'], inline=False)
+            if event['startDateTime']:
+                embed.add_field(name="Start Date & Time:", value=event['startDateTime'], inline=True)
+            if event['endDateTime']:    
+                embed.add_field(name="End Date & Time:", value=event['endDateTime'], inline=True)
+            if event['priority']:
+                embed.add_field(name="Priority:", value=event['priority'], inline=True)
+            if event['type']:    
+                embed.add_field(name="Event Type:", value=event['type'], inline=True)
+            if event['notes']:
+                embed.add_field(name="Description:", value=event['notes'], inline=False)
             await ctx.send(embed=embed)    
             
             # reset event dict
-            event = {'name': '', 'startDateTime': '', 'endDateTime': '', 'type': '', 'desc': ''}
+            event = {'name': '', 'startDateTime': '', 'endDateTime': '', 'priority': '', 'type': '', 'notes': ''}
             
     else:
         eventFlag = True
@@ -96,8 +107,8 @@ async def edit_event(ctx, client):
                     valid_update = True
                 except ValueError:
                     await channel.send("Please enter valid updated event information in following format:\n" + json.dumps(selected_event) + "\nor enter 'exitupdate' to exit")
-            
-            
+            updated_event = Event(updated_event['name'], datetime.datetime.strptime(updated_event['startDateTime'], '%Y-%m-%d %H:%M:%S'),  datetime.datetime.strptime(updated_event['endDateTime'], '%Y-%m-%d %H:%M:%S'), updated_event['priority'], updated_event['type'], updated_event['notes'])
+            update_event_from_file(str(ctx.author.id), selected_event, updated_event)
             
             
             
