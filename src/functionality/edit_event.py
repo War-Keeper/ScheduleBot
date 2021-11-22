@@ -20,10 +20,11 @@ async def edit_event(ctx, client):
     Output:
         - A reply saying whether the event was updated or not
     """
+    channel = await ctx.author.create_dm()
+    # check to verify author and channel of the message
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
     
-    channel = await ctx.author.create_dm()
     # Open and read user's calendar file
     create_event_tree(str(ctx.author.id))
     rows = read_event_file(str(ctx.author.id))
@@ -69,30 +70,38 @@ async def edit_event(ctx, client):
             event = {'name': '', 'startDateTime': '', 'endDateTime': '', 'priority': '', 'type': '', 'notes': ''}
             
     else:
+        # sending error message for empty schedule
         eventFlag = True
         embed = discord.Embed(description="Looks like your schedule is empty. You can add events using the `!schedule` command!", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
         embed.set_footer(text=f"Requested by {ctx.author}")
         await ctx.send(embed=embed) 
-    #delete the event and event type
+        
     if not eventFlag:
         embed = discord.Embed(description="Please enter the name of the event you want to edit or exit update using `exitupdate`", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
         embed.set_footer(text=f"Requested by {ctx.author}")
         await ctx.send(embed=embed)
         selected_event = None
+    
+        # loop while user enters a valid event name for update or while user exits update
         while selected_event == None:
             event_msg = await client.wait_for("message", check=check)  # Waits for user input
             event_msg = event_msg.content  # Strips message to just the text the user entered
-            if event_msg.lower() == 'exitupdate':
+            
+            if event_msg.lower() == 'exitupdate': #user exited update
                 embed = discord.Embed(description="`!editevent` command exited successfully!", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                 embed.set_footer(text=f"Requested by {ctx.author}")
                 await ctx.send(embed=embed) 
                 break
-            selected_event = next((item for item in events if item["name"] == event_msg), None)
+            
+            selected_event = next((item for item in events if item["name"] == event_msg), None) #finds event with given name or returns None if not present
+            
             if selected_event == None:
+                # ask user to re-enter valid event name or exit command
                 embed = discord.Embed(description="Looks like you entered event name that does not exists in your schedule. Please enter a valid event name or exit by entering `exitupdate`", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                 embed.set_footer(text=f"Requested by {ctx.author}")
                 await ctx.send(embed=embed)
-                
+        
+        # get updated information for the event        
         if selected_event:
             valid_update = False
             embed = discord.Embed(description="Please enter the updated event information in following format:\n\n`" + json.dumps(selected_event) + "`\n\nor enter `exitupdate` to exit update", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
@@ -104,7 +113,7 @@ async def edit_event(ctx, client):
                     updated_event = updated_event.content  # Strips message to just the text the user entered
                     if updated_event == 'exitupdate':
                         break
-                    updated_event = json.loads(updated_event)
+                    updated_event = json.loads(updated_event) # load updated event info in dict
                     events.remove(selected_event)
                     events.append(updated_event)
                     valid_update = True
@@ -112,6 +121,8 @@ async def edit_event(ctx, client):
                     embed = discord.Embed(description="Please enter valid updated event information in following format:\n\n`" + json.dumps(selected_event) + "`\n\nor enter `exitupdate` to exit update", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                     embed.set_footer(text=f"Requested by {ctx.author}")
                     await ctx.send(embed=embed)
+            
+            # update user file with the updated event information        
             if valid_update:
                 updated_event_name = updated_event['name']
                 updated_event = Event(updated_event['name'], datetime.datetime.strptime(updated_event['startDateTime'], '%Y-%m-%d %H:%M:%S'),  datetime.datetime.strptime(updated_event['endDateTime'], '%Y-%m-%d %H:%M:%S'), updated_event['priority'], updated_event['type'], updated_event['notes'])
@@ -119,6 +130,8 @@ async def edit_event(ctx, client):
                 embed = discord.Embed(description="Event `" + updated_event_name + "` updated successfully!", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                 embed.set_footer(text=f"Requested by {ctx.author}")
                 await ctx.send(embed=embed)
+            
+            # exit update command    
             else:
                 embed = discord.Embed(description="`!editevent` command exited successfully!", colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at)
                 embed.set_footer(text=f"Requested by {ctx.author}")
