@@ -4,8 +4,9 @@ import os
 import json
 
 from discord.ext.commands.help import MinimalHelpCommand
+from discord_components import DiscordComponents
 
-from functionality.AddEvent import add_event  # type: ignore
+from functionality.AddEvent2 import add_event  # type: ignore
 from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
@@ -72,7 +73,7 @@ async def on_ready():
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
     channels = bot.get_all_channels()  # Gets the channels the bot is currently watching
-
+    DiscordComponents(bot)
     text_channel_count = 0
     for channel in channels:
         if str(channel.type) != 'text':
