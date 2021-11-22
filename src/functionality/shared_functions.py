@@ -268,6 +268,37 @@ def delete_event_from_file(user_id, to_remove):
     encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + user_id + "event_types.csv")
 
 
+"""
+    Function:
+        update_event_from_file
+    Description:
+        User file is updated with the edited event
+    Input:
+        user_id: id of the author whose file needs to be edited
+        selected event: event which is to be updated in dict format
+        updated_event: Event object of updated information for selected event
+"""
+def update_event_from_file(user_id, selected_event, updated_event):
+    rows = read_event_file(user_id)
+
+    for row in rows:
+        if selected_event['name'] == row[1]:
+            rows.remove(row)
+            
+    # Open current user's calendar file for writing
+    with open(
+            os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv",
+            "w",
+            newline="",
+    ) as calendar_file:
+        # Write to column headers and array of rows back to the calendar file
+        csvwriter = csv.writer(calendar_file)
+        csvwriter.writerows(rows)
+
+    key = load_key(user_id)
+    encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Event/" + user_id + ".csv")
+    add_event_to_file(user_id, updated_event)
+    
 def create_key_directory():
     """
     Function: create_event_directory
