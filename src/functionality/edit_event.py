@@ -41,10 +41,10 @@ async def edit_event(ctx, client):
             # Get event details
             event['name'] = row[1]
             # start = row[2].split()
-            event['startDateTime'] = datetime.datetime.strptime(row[2], '%Y-%m-%d %H:%M:%S')
+            event['startDateTime'] = row[2]
             # event['startTime'] = convert_to_12(start[1][:-3])  # Convert to 12 hour format
             # end = row[3].split()
-            event['endDateTime'] = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S')
+            event['endDateTime'] = row[3]
             # event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['priority'] = row[4]
             event['type'] = row[5]
@@ -52,7 +52,6 @@ async def edit_event(ctx, client):
             
                 
             events.append(event)
-            print(events)
             # send event information to user
             embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
                                       title="Your Schedule:")
@@ -100,10 +99,8 @@ async def edit_event(ctx, client):
                     if updated_event == 'exitupdate':
                         break
                     updated_event = json.loads(updated_event)
-                    print(events)
                     events.remove(selected_event)
                     events.append(updated_event)
-                    print(events)
                     valid_update = True
                 except ValueError:
                     await channel.send("Please enter valid updated event information in following format:\n" + json.dumps(selected_event) + "\nor enter 'exitupdate' to exit")
