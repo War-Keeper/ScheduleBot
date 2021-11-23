@@ -4,7 +4,7 @@ import csv
 from datetime import datetime
 from types import TracebackType
 from src.event_type import event_type
-from src.functionality.shared_functions import create_type_directory, create_type_file, get_times
+from src.functionality.shared_functions import create_type_directory, create_type_file
 from src.functionality.shared_functions import load_key, decrypt_file, encrypt_file
 import traceback
 
