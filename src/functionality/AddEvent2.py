@@ -13,27 +13,20 @@ from src.functionality.shared_functions import create_event_tree, create_type_tr
 BOT = None
 
 
-async def grab_date(ctx, client, event_array, hrMinArray):
+async def grab_date(ctx, client, event_array, hr_min_array):
     # Get the event month
     await ctx.send(
         'Select the Event Month',
         components=[
             Select(
                 placeholder='Select a month',
-                options=[
-                    SelectOption(label='January', value='1'),
-                    SelectOption(label='February', value='2'),
-                    SelectOption(label='March', value='3'),
-                    SelectOption(label='April', value='4'),
-                    SelectOption(label='May', value='5'),
-                    SelectOption(label='June', value='6'),
-                    SelectOption(label='July', value='7'),
-                    SelectOption(label='August', value='8'),
-                    SelectOption(label='September', value='9'),
-                    SelectOption(label='October', value='10'),
-                    SelectOption(label='November', value='11'),
-                    SelectOption(label='December', value='12')
-                ]
+                options=[SelectOption(label='January', value='1'), SelectOption(label='February', value='2'),
+                         SelectOption(label='March', value='3'), SelectOption(label='April', value='4'),
+                         SelectOption(label='May', value='5'), SelectOption(label='June', value='6'),
+                         SelectOption(label='July', value='7'), SelectOption(label='August', value='8'),
+                         SelectOption(label='September', value='9'), SelectOption(label='October', value='10'),
+                         SelectOption(label='November', value='11'), SelectOption(label='December', value='12')
+                         ]
             )
         ]
     )
@@ -129,17 +122,7 @@ async def grab_date(ctx, client, event_array, hrMinArray):
     date = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
     event_array.append(date)
     # append the hr and minute time to the hrMinArray for use later by create_event_easier
-    hrMinArray.append(hr + ":" + minute + ":00")
-
-
-def check_complete(start, start_date, end, end_date, array):
-    if start and end:
-        print("Both date objects created")
-        array.append(start_date)
-        array.append(end_date)
-        return True
-    else:
-        return False
+    hr_min_array.append(hr + ":" + minute + ":00")
 
 
 async def add_event(ctx, client):
@@ -176,10 +159,7 @@ async def add_event(ctx, client):
         components=[
             Select(
                 placeholder='Pick an end date',
-                options=[
-                    SelectOption(label='Later', value='1'),
-                    SelectOption(label='Same date', value='2'),
-                ]
+                options=[SelectOption(label='Later', value='1'), SelectOption(label='Same date', value='2')]
             )
         ]
     )
