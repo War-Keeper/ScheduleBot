@@ -1,19 +1,14 @@
 import math
 import traceback
-from asyncio import sleep
-
-from src.functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, \
-    turn_types_to_string, get_times
-from types import TracebackType
-from src.Event import Event
-from src.parse.match import parse_period
 from calendar import monthrange
-from src.functionality.create_event_type_easier import create_event_type
-from discord_components import Button, ButtonStyle, Select, SelectOption, interaction
 from datetime import datetime
-import validators
 
-from src.parse.match import parse_period24
+from discord_components import Select, SelectOption
+
+from src.Event import Event
+from src.functionality.create_event_type_easier import create_event_type
+from src.functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, \
+    turn_types_to_string
 
 BOT = None
 

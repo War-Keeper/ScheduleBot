@@ -6,7 +6,8 @@ import json
 from discord.ext.commands.help import MinimalHelpCommand
 from discord_components import DiscordComponents
 
-from functionality.AddEvent2 import add_event  # type: ignore
+from functionality.AddEvent import add_event  # type: ignore
+from functionality.AddEvent2 import add_event2  # type: ignore
 from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
@@ -150,6 +151,21 @@ async def schedule(ctx):
     await add_event(ctx, bot)
 
 @bot.command()
+async def schedulebutton(ctx):
+    """
+    Function:
+        schedule
+    Description:
+        Calls the add_event function to walk a user through the event creation process
+    Input:
+        ctx - Discord context window
+    Output:
+        - A new event added to the user's calendar file
+        - A message sent to the context saying an event was successfully created
+    """
+    await add_event2(ctx, bot)
+
+@bot.command()
 async def deleteevent(ctx):
     await delete_event(ctx, bot)
 
@@ -160,7 +176,7 @@ async def find(ctx):
     Function:
         find
     Description:
-        Calls the find_avaialbleTime function to walk a user through the range associated with the given event
+        Calls the find_availableTime function to walk a user through the range associated with the given event
     Input:
         ctx - Discord context window
     Output:
