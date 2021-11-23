@@ -49,6 +49,8 @@ async def add_event(ctx, client):
         + "Or mm/dd/yy hh:mm mm/dd/yy hh:mm (24-hour formatting)"
 
     )
+    if event_msg == "exit" or event_msg == "quit":
+        return None
 
     event_dates = False
     # A loop that keeps running until a user enters correct start and end dates for their event following the required format
@@ -63,6 +65,9 @@ async def add_event(ctx, client):
             event_msg = await client.wait_for("message", check=check)
             # Strips message to just the text the user entered
             msg_content = event_msg.content
+
+        if event_msg == "exit" or event_msg == "quit":
+            return None
 
         #print(" yesa  " + str(msg_content))
         if msg_content.__contains__("am") or msg_content.__contains__("pm") or msg_content.__contains__("AM") or msg_content.__contains__("PM"):
@@ -96,6 +101,9 @@ async def add_event(ctx, client):
                 msg_content = ""
 
         # 24hr format
+        elif  msg_content.__contains__("exit") or  msg_content.__contains__("quit"):
+            return None
+
         else:
             try:
                 parse_result = parse_period24(msg_content)
@@ -160,11 +168,19 @@ async def add_event(ctx, client):
     )
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
+
+    if event_msg == "exit" or event_msg == "quit":
+        return None
+
     await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
     event_array.append(event_msg)
     await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
+
+    if event_msg == "exit" or event_msg == "quit":
+        return None
+
     if event_msg.lower() == "done":
         event_array.append("")
     else:
@@ -183,4 +199,3 @@ async def add_event(ctx, client):
         await channel.send(
             "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
         )
-
