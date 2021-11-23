@@ -402,3 +402,4 @@ def decrypt_file(key, filepath):
     # writing the decrypted data
     with open(filepath, 'wb') as dec_file:
         dec_file.write(decrypted)
+
