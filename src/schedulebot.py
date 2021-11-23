@@ -7,7 +7,7 @@ from discord.ext.commands.help import MinimalHelpCommand
 from discord_components import DiscordComponents
 
 from functionality.AddEvent import add_event  # type: ignore
-from functionality.AddEvent2 import add_event2  # type: ignore
+from functionality.AddEvent2 import add_event as add_event2  # type: ignore
 from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
