@@ -4,8 +4,10 @@ import os
 import json
 
 from discord.ext.commands.help import MinimalHelpCommand
+from discord_components import DiscordComponents
 
 from functionality.AddEvent import add_event  # type: ignore
+from functionality.AddEvent2 import add_event as add_event2  # type: ignore
 from functionality.highlights import get_highlight
 from functionality.create_event_type import create_event_type
 from functionality.FindAvailableTime import find_avaialbleTime
@@ -44,6 +46,7 @@ async def help(ctx):
     )
     em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
     em.add_field(name="schedule", value="Creates an event", inline=False)
+    em.add_field(name="schedulebutton", value="Creates an event using buttons", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
                                    "should follow:\n!day "
@@ -53,6 +56,7 @@ async def help(ctx):
     em.add_field(name="typedelete", value="Deletes an event type", inline=True)
     em.add_field(name="exportfile", value="Exports a CSV file of your events", inline=False)
     em.add_field(name="importfile", value="Import events from a CSV or ICS file", inline=False)
+    em.add_field(name="editevent", value="Edits the event with the new information", inline=False)
     await ctx.send(embed=em)
 
 
@@ -72,7 +76,7 @@ async def on_ready():
     # Outputs bot name to console once bot is started
     print("We have logged in as {0.user}".format(bot))
     channels = bot.get_all_channels()  # Gets the channels the bot is currently watching
-
+    DiscordComponents(bot)
     text_channel_count = 0
     for channel in channels:
         if str(channel.type) != 'text':
@@ -149,6 +153,21 @@ async def schedule(ctx):
     await add_event(ctx, bot)
 
 @bot.command()
+async def schedulebutton(ctx):
+    """
+    Function:
+        schedule
+    Description:
+        Calls the add_event function to walk a user through the event creation process
+    Input:
+        ctx - Discord context window
+    Output:
+        - A new event added to the user's calendar file
+        - A message sent to the context saying an event was successfully created
+    """
+    await add_event2(ctx, bot)
+
+@bot.command()
 async def deleteevent(ctx):
     await delete_event(ctx, bot)
 
@@ -164,7 +183,7 @@ async def find(ctx):
     Function:
         find
     Description:
-        Calls the find_avaialbleTime function to walk a user through the range associated with the given event
+        Calls the find_availableTime function to walk a user through the range associated with the given event
     Input:
         ctx - Discord context window
     Output:

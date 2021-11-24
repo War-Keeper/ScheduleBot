@@ -67,8 +67,10 @@ async def add_event2(ctx, client):
             event_msg = await client.wait_for("message", check=check)
             # Strips message to just the text the user entered
             msg_content = event_msg.content
+
         if event_msg == "exit" or event_msg == "quit":
             return None
+
         # print(" yesa  " + str(msg_content))
         if msg_content.__contains__("am") or msg_content.__contains__("pm") or msg_content.__contains__ \
                 ("AM") or msg_content.__contains__("PM"):
@@ -168,15 +170,19 @@ async def add_event2(ctx, client):
     )
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
+
     if event_msg == "exit" or event_msg == "quit":
         return None
+
     await create_event_type(ctx, client, event_msg)  # Running event_type creation subroutine
     event_array.append(event_msg)
     await channel.send("Any additional description you want me to add about the event? If not, enter 'done'")
     event_msg = await client.wait_for("message", check=check)  # Waits for user input
     event_msg = event_msg.content  # Strips message to just the text the user entered
+
     if event_msg == "exit" or event_msg == "quit":
         return None
+
     if event_msg.lower() == "done":
         event_array.append("-")
     else:
@@ -202,7 +208,7 @@ async def group_event(ctx, client, user, emoji):
     arr = await add_event2(ctx, client)
     em = discord.Embed(
         title="Group Event Created!",
-        description="If you would Like to be notified of this event, please click on the 📅",
+        description="If you would Like to be notified of this event, please click on the " + emoji,
     )
     em.add_field(name="Name", value=str(arr[0]), inline=False)
     em.add_field(name="Start", value=str(arr[1]), inline=False)
@@ -221,9 +227,8 @@ async def group_event(ctx, client, user, emoji):
 
     return arr
 
-
 async def add_others_event(user, event_array):
-    create_type_tree(str(id))
+    create_type_tree(str(user.id))
     # Tries to create an Event object from the user input
     try:
         current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5])

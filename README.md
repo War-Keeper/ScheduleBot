@@ -120,6 +120,11 @@ When you look for available times, you now can use `!find` to find only the avai
 
 ![Find Available times](docs/img/find.gif)
 
+### Not planning on attending ? Delete the event
+When you want are not going to attend the event, you can use '!deleteevent' to cancel the appointment schedule
+
+![Delete an event](https://github.com/War-Keeper/ScheduleBot/blob/main/docs/img/deleteEventSchedule.gif)
+
 ## For Developers
 
 ### Get your Discord bot 
