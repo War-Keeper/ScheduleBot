@@ -15,6 +15,7 @@ from functionality.export_file import export_file
 from functionality.import_file import import_file
 from functionality.edit_event import edit_event
 from functionality.group_event import group_event, add_others_event
+from functionality.retrieve import retrieve_event
 
 global groupEvent
 global emojiArray
@@ -153,6 +154,11 @@ async def deleteevent(ctx):
 
 
 @bot.command()
+async def retrieveevents(ctx):
+    await retrieve_event(ctx, bot)
+
+
+@bot.command()
 async def find(ctx):
     """
     Function:
@@ -269,7 +275,7 @@ async def freetime(ctx):
 
 # Runs the bot (local machine)
 if __name__ == "__main__":
-    from config import TOKEN
+    from src.config import TOKEN
     global emojiArray
     global emojiCounter
     global groupEvent

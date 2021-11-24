@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Important Variables
-config.py
+src/config.py
 schedulebot\ copy.py
 
 # VSCode
