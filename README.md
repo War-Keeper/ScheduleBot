@@ -125,6 +125,11 @@ When you want are not going to attend the event, you can use '!deleteevent' to c
 
 ![Delete an event](https://github.com/War-Keeper/ScheduleBot/blob/main/docs/img/deleteEventSchedule.gif)
 
+### Want to see a consolidated timeline of all the scheduled events? Retrieve Events is the Answer!
+If you want to see a consolidated timeline of all the events that you have scheduled for the day then use the '!retrieveevents' command.
+
+![Retrieve an Event](https://github.com/War-Keeper/ScheduleBot/blob/main/docs/img/RetrieveEvents.gif)
+
 ## For Developers
 
 ### Get your Discord bot 
