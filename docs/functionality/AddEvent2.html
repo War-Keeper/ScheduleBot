@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.functionality.AddEvent2 API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#2f3337}.flex{display:flex !important}body{color:#ffffff;background-color:#181A1B;line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#ffffff;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#c8ccd0}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#0c0d0e;color:#ffffff;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;color:#ffffff;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#0c0d0e;color:#ffffff;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#0c0d0e;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#2f3337}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.functionality.AddEvent2</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import math
+import traceback
+from calendar import monthrange
+from datetime import datetime
+from Event import Event
+from discord_components import Select, SelectOption
+from functionality.create_event_type_easier import create_event_type
+from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, \
+    turn_types_to_string
+
+BOT = None
+
+
+async def grab_date(ctx, client, event_array, hr_min_array):
+    # Get the event month
+    await ctx.send(
+        &#39;Select the Event Month&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select a month&#39;,
+                options=[SelectOption(label=&#39;January&#39;, value=&#39;1&#39;), SelectOption(label=&#39;February&#39;, value=&#39;2&#39;),
+                         SelectOption(label=&#39;March&#39;, value=&#39;3&#39;), SelectOption(label=&#39;April&#39;, value=&#39;4&#39;),
+                         SelectOption(label=&#39;May&#39;, value=&#39;5&#39;), SelectOption(label=&#39;June&#39;, value=&#39;6&#39;),
+                         SelectOption(label=&#39;July&#39;, value=&#39;7&#39;), SelectOption(label=&#39;August&#39;, value=&#39;8&#39;),
+                         SelectOption(label=&#39;September&#39;, value=&#39;9&#39;), SelectOption(label=&#39;October&#39;, value=&#39;10&#39;),
+                         SelectOption(label=&#39;November&#39;, value=&#39;11&#39;), SelectOption(label=&#39;December&#39;, value=&#39;12&#39;)
+                         ]
+            )
+        ]
+    )
+    monthInteraction = await client.wait_for(&#39;select_option&#39;,
+                                             check=lambda x: x.values[0] in (
+                                                 &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;))
+    # Prevents &#34;Interaction failed&#34; message
+    if monthInteraction.channel == ctx.channel:
+        await monthInteraction.respond(content=f&#34;{monthInteraction.values[0]} selected&#34;)
+    month = monthInteraction.values[0]
+    month_num = (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;).index(
+        month) + 1
+    # Get the event day, varies depending on the number of days in the month
+    num_days = monthrange(datetime.now().year, month_num)[1]
+    dayOptionArray = []
+    dayStringArray = []
+    for i in range(0, num_days):
+        dayOptionArray.append(SelectOption(label=str(i), value=str(i)))
+        dayStringArray.append(str(i))
+    dayStringArray.append((str(num_days)))
+    dayOptionArray.append((SelectOption(label=str(num_days), value=str(num_days))))
+    dayArrayHalf1 = dayOptionArray[:len(dayOptionArray) // 2]
+    dayArrayHalf2 = dayOptionArray[len(dayOptionArray) // 2:]
+    await ctx.send(
+        f&#39;Select the Event Day: 1-{str(math.floor(num_days / 2))}&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select a day&#39;,
+                options=dayArrayHalf1
+            )
+        ]
+    )
+    await ctx.send(
+        f&#39;or {str(math.floor((num_days / 2)) + 1)} - {str(num_days)}&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select a day&#39;,
+                options=dayArrayHalf2
+            )
+        ]
+    )
+    dayInteraction = await client.wait_for(&#39;select_option&#39;, check=lambda x: x.values[0] in dayStringArray)
+    # Prevents &#34;Interaction failed&#34; message
+    if dayInteraction.channel == ctx.channel:
+        await dayInteraction.respond(content=f&#34;{dayInteraction.values[0]} selected&#34;)
+    day = dayInteraction.values[0]
+    # Get the start hour (24hr) time
+    hrOptionArray = []
+    hrStringArray = []
+    for i in range(0, 24):
+        hrOptionArray.append(SelectOption(label=str(i), value=str(i)))
+        hrStringArray.append(str(i))
+    await ctx.send(
+        f&#39;Select the Event hour in 24hr time&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select the event hour&#39;,
+                options=hrOptionArray
+            )
+        ]
+    )
+    # Prevents &#34;Interaction failed&#34; message
+    hrInteraction = await client.wait_for(&#39;select_option&#39;, check=lambda x: x.values[0] in hrStringArray)
+    if hrInteraction.channel == ctx.channel:
+        await hrInteraction.respond(content=f&#34;{hrInteraction.values[0]} selected&#34;)
+    hr = hrInteraction.values[0]
+
+    # Get the event minute
+    minOptionArray = []
+    minStringArray = []
+    for i in range(0, 60, 5):
+        minOptionArray.append(SelectOption(label=str(i), value=str(i)))
+        minStringArray.append(str(i))
+    await ctx.send(
+        f&#39;Select the Event minute corresponding to the hour&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select the event minute&#39;,
+                options=minOptionArray
+            )
+        ]
+    )
+    # Prevents &#34;Interaction failed&#34; message
+    minInteraction = await client.wait_for(&#39;select_option&#39;, check=lambda x: x.values[0] in minStringArray)
+    if minInteraction.channel == ctx.channel:
+        await minInteraction.respond(content=f&#34;{minInteraction.values[0]} selected&#34;)
+    minute = minInteraction.values[0]
+    if int(month) &lt; 10:
+        month = &#34;0&#34; + month
+    if int(day) &lt; 10:
+        day = &#34;0&#34; + day
+    date = str(datetime.now().year) + &#34;-&#34; + month + &#34;-&#34; + day + &#34; &#34; + hr + &#34;:&#34; + minute + &#34;:00&#34;
+    date = datetime.strptime(date, &#34;%Y-%m-%d %H:%M:%S&#34;)
+    event_array.append(date)
+    # append the hr and minute time to the hrMinArray for use later by create_event_easier
+    hr_min_array.append(hr + &#34;:&#34; + minute + &#34;:00&#34;)
+
+
+async def add_event(ctx, client):
+    &#34;&#34;&#34;
+    Function:
+        add_event
+    Description:
+        Walks a user through the event creation process
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event added to the user&#39;s calendar file
+        - A message sent to the context saying an event was successfully created
+    &#34;&#34;&#34;
+
+    channel = await ctx.author.create_dm()
+
+    def check(m):
+        return m.content is not None and m.channel == channel and m.author == ctx.author
+
+    event_array = []
+    # Track the hr:min start and end time of the Event, for use by create_event_type_easier
+    hrMinArray = []
+    await channel.send(&#34;Lets add an event!\n&#34; + &#34;First give me the name of your event:&#34;)  # Get the name of the event
+    event_msg = await client.wait_for(&#34;message&#34;, check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    event_array.append(event_msg)  # Append the name to the event array
+    await ctx.send(&#34;First let&#39;s select the start date:&#34;)  # Query the start date of the Event
+    await grab_date(ctx, client, event_array, hrMinArray)  # Get the start date of the Event
+
+    await ctx.send(
+        &#39;Does this Event end on the same date, or later?&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Pick an end date&#39;,
+                options=[SelectOption(label=&#39;Later&#39;, value=&#39;1&#39;), SelectOption(label=&#39;Same date&#39;, value=&#39;2&#39;)]
+            )
+        ]
+    )
+    endDateInteraction = await client.wait_for(&#39;select_option&#39;,
+                                               check=lambda x: x.values[0] in (&#39;1&#39;, &#39;2&#39;))
+    # Prevents &#34;Interaction failed&#34; message
+    if endDateInteraction.channel == ctx.channel:
+        await endDateInteraction.respond(content=f&#34;{endDateInteraction.values[0]} selected&#34;)
+    endDateChoice = endDateInteraction.values[0]
+    if int(endDateChoice) == 1:
+        await ctx.send(&#34;Please select the end date for the event&#34;)
+        await grab_date(ctx, client, event_array, hrMinArray)
+    else:
+
+        event_array.append(event_array[len(event_array) - 1])
+        hrMinArray.append(hrMinArray[len(hrMinArray) - 1])
+    print(event_array)
+    # Get the priority of the Event
+    await ctx.send(
+        &#39;How important is this event? Pick a number between 1-5&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Pick a priority&#39;,
+                options=[
+                    SelectOption(label=&#39;5 - Highest priority.&#39;, value=&#39;5&#39;),
+                    SelectOption(label=&#39;4 - High priority.&#39;, value=&#39;4&#39;),
+                    SelectOption(label=&#39;3 - Medium priority.&#39;, value=&#39;3&#39;),
+                    SelectOption(label=&#39;2 - Low priority.&#39;, value=&#39;2&#39;),
+                    SelectOption(label=&#39;1 - Lowest priority.&#39;, value=&#39;1&#39;),
+                ]
+            )
+        ]
+    )
+    priorityInteraction = await client.wait_for(&#39;select_option&#39;,
+                                                check=lambda x: x.values[0] in (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;))
+    # Prevents &#34;Interaction failed&#34; message
+    if priorityInteraction.channel == ctx.channel:
+        await priorityInteraction.respond(content=f&#34;{priorityInteraction.values[0]} selected&#34;)
+    priority = priorityInteraction.values[0]
+    event_array.append(priority)
+
+    create_type_tree(str(ctx.author.id))
+    output = turn_types_to_string(str(ctx.author.id))
+    await channel.send(
+        &#34;Tell me what type of event this is. Here are a list of event types I currently know:\n&#34; + output
+    )
+    event_msg = await client.wait_for(&#34;message&#34;, check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    await create_event_type(ctx, client, event_msg, hrMinArray)  # Running event_type creation subroutine
+    event_array.append(event_msg)
+    await channel.send(&#34;Any additional description you want me to add about the event? If not, enter &#39;done&#39;&#34;)
+    event_msg = await client.wait_for(&#34;message&#34;, check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    if event_msg.lower() == &#34;done&#34;:
+        event_array.append(&#34;&#34;)
+    else:
+        event_array.append(event_msg)
+
+    # Tries to create an Event object from the user input
+    try:
+        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5])
+        print(event_array)
+        await channel.send(&#34;Your event was successfully created!&#34;)
+        print(current)
+        create_event_tree(str(ctx.author.id))
+        add_event_to_file(str(ctx.author.id), current)
+    except Exception as e:
+        # Outputs an error message if the event could not be created
+        print(e)
+        traceback.print_exc()
+        await channel.send(
+            &#34;There was an error creating your event. &#34;
+            &#34;Make sure your formatting is correct and try creating the event again.&#34;
+        )</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="src.functionality.AddEvent2.add_event"><code class="name flex">
+<span>async def <span class="ident">add_event</span></span>(<span>ctx, client)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="function">Function</h2>
+<p>add_event</p>
+<h2 id="description">Description</h2>
+<p>Walks a user through the event creation process</p>
+<h2 id="input">Input</h2>
+<p>ctx - Discord context window
+client - Discord bot user</p>
+<h2 id="output">Output</h2>
+<ul>
+<li>A new event added to the user's calendar file</li>
+<li>A message sent to the context saying an event was successfully created</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def add_event(ctx, client):
+    &#34;&#34;&#34;
+    Function:
+        add_event
+    Description:
+        Walks a user through the event creation process
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+    Output:
+        - A new event added to the user&#39;s calendar file
+        - A message sent to the context saying an event was successfully created
+    &#34;&#34;&#34;
+
+    channel = await ctx.author.create_dm()
+
+    def check(m):
+        return m.content is not None and m.channel == channel and m.author == ctx.author
+
+    event_array = []
+    # Track the hr:min start and end time of the Event, for use by create_event_type_easier
+    hrMinArray = []
+    await channel.send(&#34;Lets add an event!\n&#34; + &#34;First give me the name of your event:&#34;)  # Get the name of the event
+    event_msg = await client.wait_for(&#34;message&#34;, check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    event_array.append(event_msg)  # Append the name to the event array
+    await ctx.send(&#34;First let&#39;s select the start date:&#34;)  # Query the start date of the Event
+    await grab_date(ctx, client, event_array, hrMinArray)  # Get the start date of the Event
+
+    await ctx.send(
+        &#39;Does this Event end on the same date, or later?&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Pick an end date&#39;,
+                options=[SelectOption(label=&#39;Later&#39;, value=&#39;1&#39;), SelectOption(label=&#39;Same date&#39;, value=&#39;2&#39;)]
+            )
+        ]
+    )
+    endDateInteraction = await client.wait_for(&#39;select_option&#39;,
+                                               check=lambda x: x.values[0] in (&#39;1&#39;, &#39;2&#39;))
+    # Prevents &#34;Interaction failed&#34; message
+    if endDateInteraction.channel == ctx.channel:
+        await endDateInteraction.respond(content=f&#34;{endDateInteraction.values[0]} selected&#34;)
+    endDateChoice = endDateInteraction.values[0]
+    if int(endDateChoice) == 1:
+        await ctx.send(&#34;Please select the end date for the event&#34;)
+        await grab_date(ctx, client, event_array, hrMinArray)
+    else:
+
+        event_array.append(event_array[len(event_array) - 1])
+        hrMinArray.append(hrMinArray[len(hrMinArray) - 1])
+    print(event_array)
+    # Get the priority of the Event
+    await ctx.send(
+        &#39;How important is this event? Pick a number between 1-5&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Pick a priority&#39;,
+                options=[
+                    SelectOption(label=&#39;5 - Highest priority.&#39;, value=&#39;5&#39;),
+                    SelectOption(label=&#39;4 - High priority.&#39;, value=&#39;4&#39;),
+                    SelectOption(label=&#39;3 - Medium priority.&#39;, value=&#39;3&#39;),
+                    SelectOption(label=&#39;2 - Low priority.&#39;, value=&#39;2&#39;),
+                    SelectOption(label=&#39;1 - Lowest priority.&#39;, value=&#39;1&#39;),
+                ]
+            )
+        ]
+    )
+    priorityInteraction = await client.wait_for(&#39;select_option&#39;,
+                                                check=lambda x: x.values[0] in (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;))
+    # Prevents &#34;Interaction failed&#34; message
+    if priorityInteraction.channel == ctx.channel:
+        await priorityInteraction.respond(content=f&#34;{priorityInteraction.values[0]} selected&#34;)
+    priority = priorityInteraction.values[0]
+    event_array.append(priority)
+
+    create_type_tree(str(ctx.author.id))
+    output = turn_types_to_string(str(ctx.author.id))
+    await channel.send(
+        &#34;Tell me what type of event this is. Here are a list of event types I currently know:\n&#34; + output
+    )
+    event_msg = await client.wait_for(&#34;message&#34;, check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    await create_event_type(ctx, client, event_msg, hrMinArray)  # Running event_type creation subroutine
+    event_array.append(event_msg)
+    await channel.send(&#34;Any additional description you want me to add about the event? If not, enter &#39;done&#39;&#34;)
+    event_msg = await client.wait_for(&#34;message&#34;, check=check)  # Waits for user input
+    event_msg = event_msg.content  # Strips message to just the text the user entered
+    if event_msg.lower() == &#34;done&#34;:
+        event_array.append(&#34;&#34;)
+    else:
+        event_array.append(event_msg)
+
+    # Tries to create an Event object from the user input
+    try:
+        current = Event(event_array[0], event_array[1], event_array[2], event_array[3], event_array[4], event_array[5])
+        print(event_array)
+        await channel.send(&#34;Your event was successfully created!&#34;)
+        print(current)
+        create_event_tree(str(ctx.author.id))
+        add_event_to_file(str(ctx.author.id), current)
+    except Exception as e:
+        # Outputs an error message if the event could not be created
+        print(e)
+        traceback.print_exc()
+        await channel.send(
+            &#34;There was an error creating your event. &#34;
+            &#34;Make sure your formatting is correct and try creating the event again.&#34;
+        )</code></pre>
+</details>
+</dd>
+<dt id="src.functionality.AddEvent2.grab_date"><code class="name flex">
+<span>async def <span class="ident">grab_date</span></span>(<span>ctx, client, event_array, hr_min_array)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def grab_date(ctx, client, event_array, hr_min_array):
+    # Get the event month
+    await ctx.send(
+        &#39;Select the Event Month&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select a month&#39;,
+                options=[SelectOption(label=&#39;January&#39;, value=&#39;1&#39;), SelectOption(label=&#39;February&#39;, value=&#39;2&#39;),
+                         SelectOption(label=&#39;March&#39;, value=&#39;3&#39;), SelectOption(label=&#39;April&#39;, value=&#39;4&#39;),
+                         SelectOption(label=&#39;May&#39;, value=&#39;5&#39;), SelectOption(label=&#39;June&#39;, value=&#39;6&#39;),
+                         SelectOption(label=&#39;July&#39;, value=&#39;7&#39;), SelectOption(label=&#39;August&#39;, value=&#39;8&#39;),
+                         SelectOption(label=&#39;September&#39;, value=&#39;9&#39;), SelectOption(label=&#39;October&#39;, value=&#39;10&#39;),
+                         SelectOption(label=&#39;November&#39;, value=&#39;11&#39;), SelectOption(label=&#39;December&#39;, value=&#39;12&#39;)
+                         ]
+            )
+        ]
+    )
+    monthInteraction = await client.wait_for(&#39;select_option&#39;,
+                                             check=lambda x: x.values[0] in (
+                                                 &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;))
+    # Prevents &#34;Interaction failed&#34; message
+    if monthInteraction.channel == ctx.channel:
+        await monthInteraction.respond(content=f&#34;{monthInteraction.values[0]} selected&#34;)
+    month = monthInteraction.values[0]
+    month_num = (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;).index(
+        month) + 1
+    # Get the event day, varies depending on the number of days in the month
+    num_days = monthrange(datetime.now().year, month_num)[1]
+    dayOptionArray = []
+    dayStringArray = []
+    for i in range(0, num_days):
+        dayOptionArray.append(SelectOption(label=str(i), value=str(i)))
+        dayStringArray.append(str(i))
+    dayStringArray.append((str(num_days)))
+    dayOptionArray.append((SelectOption(label=str(num_days), value=str(num_days))))
+    dayArrayHalf1 = dayOptionArray[:len(dayOptionArray) // 2]
+    dayArrayHalf2 = dayOptionArray[len(dayOptionArray) // 2:]
+    await ctx.send(
+        f&#39;Select the Event Day: 1-{str(math.floor(num_days / 2))}&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select a day&#39;,
+                options=dayArrayHalf1
+            )
+        ]
+    )
+    await ctx.send(
+        f&#39;or {str(math.floor((num_days / 2)) + 1)} - {str(num_days)}&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select a day&#39;,
+                options=dayArrayHalf2
+            )
+        ]
+    )
+    dayInteraction = await client.wait_for(&#39;select_option&#39;, check=lambda x: x.values[0] in dayStringArray)
+    # Prevents &#34;Interaction failed&#34; message
+    if dayInteraction.channel == ctx.channel:
+        await dayInteraction.respond(content=f&#34;{dayInteraction.values[0]} selected&#34;)
+    day = dayInteraction.values[0]
+    # Get the start hour (24hr) time
+    hrOptionArray = []
+    hrStringArray = []
+    for i in range(0, 24):
+        hrOptionArray.append(SelectOption(label=str(i), value=str(i)))
+        hrStringArray.append(str(i))
+    await ctx.send(
+        f&#39;Select the Event hour in 24hr time&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select the event hour&#39;,
+                options=hrOptionArray
+            )
+        ]
+    )
+    # Prevents &#34;Interaction failed&#34; message
+    hrInteraction = await client.wait_for(&#39;select_option&#39;, check=lambda x: x.values[0] in hrStringArray)
+    if hrInteraction.channel == ctx.channel:
+        await hrInteraction.respond(content=f&#34;{hrInteraction.values[0]} selected&#34;)
+    hr = hrInteraction.values[0]
+
+    # Get the event minute
+    minOptionArray = []
+    minStringArray = []
+    for i in range(0, 60, 5):
+        minOptionArray.append(SelectOption(label=str(i), value=str(i)))
+        minStringArray.append(str(i))
+    await ctx.send(
+        f&#39;Select the Event minute corresponding to the hour&#39;,
+        components=[
+            Select(
+                placeholder=&#39;Select the event minute&#39;,
+                options=minOptionArray
+            )
+        ]
+    )
+    # Prevents &#34;Interaction failed&#34; message
+    minInteraction = await client.wait_for(&#39;select_option&#39;, check=lambda x: x.values[0] in minStringArray)
+    if minInteraction.channel == ctx.channel:
+        await minInteraction.respond(content=f&#34;{minInteraction.values[0]} selected&#34;)
+    minute = minInteraction.values[0]
+    if int(month) &lt; 10:
+        month = &#34;0&#34; + month
+    if int(day) &lt; 10:
+        day = &#34;0&#34; + day
+    date = str(datetime.now().year) + &#34;-&#34; + month + &#34;-&#34; + day + &#34; &#34; + hr + &#34;:&#34; + minute + &#34;:00&#34;
+    date = datetime.strptime(date, &#34;%Y-%m-%d %H:%M:%S&#34;)
+    event_array.append(date)
+    # append the hr and minute time to the hrMinArray for use later by create_event_easier
+    hr_min_array.append(hr + &#34;:&#34; + minute + &#34;:00&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<!--Adapted from Tim Menzies: https://github.com/timm/bnbad2/blob/main/docs/logo.mako -->
+<center>
+<a href="http://github.com/lyonva/ScheduleBot"><img src="https://raw.githubusercontent.com/lyonva/ScheduleBot/main/docs/img/banner.png" width=2000></a>
+<p>CSC 510 Software Engineering, Fall 21, Group 14<br>
+</p>
+<p>
+<a href="https://zenodo.org/badge/latestdoi/403393616"><img src="https://zenodo.org/badge/403393616.svg" alt="DOI"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
+<br><img src="https://img.shields.io/badge/python-v3.9-blue">
+<br><img src="https://github.com/lyonva/ScheduleBot/actions/workflows/python-app.yml/badge.svg">
+<img src="https://raw.githubusercontent.com/lyonva/ScheduleBot/main/docs/img/coverage.svg">
+</p><hr>
+</center>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.functionality" href="index.html">src.functionality</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="src.functionality.AddEvent2.add_event" href="#src.functionality.AddEvent2.add_event">add_event</a></code></li>
+<li><code><a title="src.functionality.AddEvent2.grab_date" href="#src.functionality.AddEvent2.grab_date">grab_date</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
