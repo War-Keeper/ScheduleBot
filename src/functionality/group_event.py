@@ -22,13 +22,14 @@ def check_complete(start, start_date, end, end_date, array):
 async def add_event2(ctx, client):
     """
     Function:
-        add_event
+        add_event2
     Description:
         Walks a user through the event creation process
     Input:
         ctx - Discord context window
         client - Discord bot user
     Output:
+        - returns an array of the event's information
         - A new event added to the user's calendar file
         - A message sent to the context saying an event was successfully created
     """
@@ -205,6 +206,20 @@ async def add_event2(ctx, client):
     return event_array
 
 async def group_event(ctx, client, user, emoji):
+    """
+    Function:
+        group_event
+    Description:
+        creates a group event by posting a message to the channel and waiting for user input with clickable reactions
+    Input:
+        ctx - Discord context window
+        client - Discord bot user
+        user - Discord user
+        emoji - Discord emoji
+    Output:
+        - returns an array of the event's information
+        - A new post is created in the channel with an embed showing the event's information
+    """
     arr = await add_event2(ctx, client)
     em = discord.Embed(
         title="Group Event Created!",
@@ -228,6 +243,18 @@ async def group_event(ctx, client, user, emoji):
     return arr
 
 async def add_others_event(user, event_array):
+    """
+    Function:
+        add_others_event
+    Description:
+        adds an event to the event tree for a user
+    Input:
+        user - Discord user
+        event_array - array of event information
+    Output:
+        - A new event added to the user's calendar file
+        - A message sent to the context saying an event was successfully created
+    """
     create_type_tree(str(user.id))
     # Tries to create an Event object from the user input
     try:
@@ -242,3 +269,4 @@ async def add_others_event(user, event_array):
         await user.send(
             "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
         )
+
