@@ -9,7 +9,7 @@
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/qchen59/ScheduleBot?include_prereleases)](https://github.com/qchen59/ScheduleBot/releases)
 [![GitHub all releases](https://img.shields.io/github/downloads/qchen59/ScheduleBot/total)](https://github.com/qchen59/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
-[![Coverage Status](https://coveralls.io/repos/github/qchen59/ScheduleBot/badge.svg?branch=main)](https://coveralls.io/github/qchen59/ScheduleBot?branch=main)
+[![codecov](https://codecov.io/gh/War-Keeper/ScheduleBot/branch/main/graph/badge.svg?token=25984f2e-c35c-4599-82e5-c7a24b358d31)](https://codecov.io/gh/War-Keeper/ScheduleBot)
 
 # ScheduleBot
 
