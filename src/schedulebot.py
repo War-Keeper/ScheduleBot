@@ -1,28 +1,24 @@
 import discord  # type: ignore
 from discord.ext import commands  # type: ignore
-import os
-import json
-
-from discord.ext.commands.help import MinimalHelpCommand
 from discord_components import DiscordComponents
 
 from functionality.AddEvent import add_event  # type: ignore
 from functionality.AddEvent2 import add_event as add_event2  # type: ignore
-from functionality.highlights import get_highlight
-from functionality.create_event_type import create_event_type
-from functionality.FindAvailableTime import find_avaialbleTime
-from functionality.delete_event_type import delete_event_type
 from functionality.DisplayFreeTime import get_free_time
-from functionality.export_file import export_file
-from functionality.import_file import import_file
+from functionality.FindAvailableTime import find_avaialbleTime
+from functionality.create_event_type import create_event_type
+from functionality.delete_event_type import delete_event_type
 from functionality.edit_event import edit_event
+from functionality.export_file import export_file
 from functionality.group_event import group_event, add_others_event
+from functionality.highlights import get_highlight
+from functionality.import_file import import_file
 from functionality.retrieve import retrieve_event
+from functionality.DeleteEvent import delete_event
 
 global groupEvent
 global emojiArray
 global emojiCounter
-from functionality.DeleteEvent import delete_event
 
 bot = commands.Bot(command_prefix="!")  # Creates the bot with a command prefix of '!'
 bot.remove_command("help")  # Removes the help command, so it can be created using Discord embed pages later
@@ -137,6 +133,7 @@ async def on_reaction_add(reaction, user):
                 pass
         counter += 1
 
+
 @bot.command()
 async def schedule(ctx):
     """
@@ -152,6 +149,7 @@ async def schedule(ctx):
     """
     await add_event(ctx, bot)
 
+
 @bot.command()
 async def schedulebutton(ctx):
     """
@@ -166,6 +164,7 @@ async def schedulebutton(ctx):
         - A message sent to the context saying an event was successfully created
     """
     await add_event2(ctx, bot)
+
 
 @bot.command()
 async def deleteevent(ctx):
@@ -262,9 +261,11 @@ async def typecreate(ctx):
 async def typedelete(ctx):
     await delete_event_type(ctx, bot)
 
+
 @bot.command()
 async def editevent(ctx):
     await edit_event(ctx, bot)
+
 
 @bot.command()
 async def groupevent(ctx):
@@ -277,6 +278,7 @@ async def groupevent(ctx):
         emojiCounter += 1
         if emojiCounter == len(emojiArray):
             emojiCounter = 0
+
 
 @bot.command()
 async def freetime(ctx):
@@ -295,6 +297,7 @@ async def freetime(ctx):
 # Runs the bot (local machine)
 if __name__ == "__main__":
     from src.config import TOKEN
+
     global emojiArray
     global emojiCounter
     global groupEvent

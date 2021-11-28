@@ -1,75 +1,54 @@
 # From https://stackoverflow.com/questions/25827160/importing-correctly-with-pytest
 # Change current working directory so test case can find the source files
-import sys, os
-
-sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
-
-import pytest
 import datetime
+import os
+import sys
+from random import randint
+
 import discord
 import discord.ext.commands as commands
 import discord.ext.test as test
-
-from random import randint
+import pytest
+from Event import Event
 from functionality.highlights import check_start_or_end, convert_to_12, get_highlight, get_date
 from functionality.shared_functions import create_event_tree, add_event_to_file
-from Event import Event
 
+sys.path.append(os.path.realpath(os.path.dirname(__file__) + "/../src"))
 
 NUM_ITER = 1000
 
-@pytest.fixture
-def client(event_loop):
-    c = discord.Client(loop=event_loop)
-    test.configure(c)
-    return c
 
 
-@pytest.fixture
-def bot(request, event_loop):
-    intents = discord.Intents.default()
-    intents.members = True
-    b = commands.Bot("!", loop=event_loop, intents=intents)
 
-    marks = request.function.pytestmark
-    mark = None
-    for mark in marks:
-        if mark.name == "cogs":
-            break
+# @pytest.mark.asyncio
+# async def test_get_free_time_empty(bot, client):
+#     guild = bot.guilds[0]
+#     channel = guild.text_channels[0]
+#     message = await channel.send("!day today")
+#
+#     await get_highlight(message, 'today')
+#
+#
+# @pytest.mark.asyncio
+# async def test_get_free_time(bot, client):
+#     guild = bot.guilds[0]
+#     channel = guild.text_channels[0]
+#     message = await channel.send("!day today")
+#
+#     start = datetime.datetime(2021, 9, 30, 0, 0)
+#     end = datetime.datetime(2021, 9, 30, 23, 59)
+#
+#     current = Event("SE project", start, end, 2, "homework", "Finish it")
+#     create_event_tree(str(message.author.id))
+#     add_event_to_file(str(message.author.id), current)
+#
+#     await get_highlight(message, 'today')
 
-    if mark is not None:
-        for extension in mark.args:
-            b.load_extension("tests.internal." + extension)
-
-    test.configure(b)
-    return b
-
-@pytest.mark.asyncio
-async def test_get_free_time_empty(bot, client):
-    guild = bot.guilds[0]
-    channel = guild.text_channels[0]
-    message = await channel.send("!day today")
-
-    await get_highlight(message, 'today')
-
-@pytest.mark.asyncio
-async def test_get_free_time(bot, client):
-    guild = bot.guilds[0]
-    channel = guild.text_channels[0]
-    message = await channel.send("!day today")
-
-    start = datetime.datetime(2021, 9, 30, 0, 0)
-    end = datetime.datetime(2021, 9, 30, 23, 59)
-
-    current = Event("SE project", start, end, 2, "homework", "Finish it")
-    create_event_tree(str(message.author.id))
-    add_event_to_file(str(message.author.id), current)
-
-    await get_highlight(message, 'today')
 
 """
 TESTING DATE CHECKING
 """
+
 
 # Generate one random datetime object between an uniform range
 def random_date(start=2020, end=2025):
@@ -90,7 +69,6 @@ def random_date(start=2020, end=2025):
 
 # Test if event starts and ends on the same day
 def test_start_and_end():
-
     # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # pick a random date
@@ -105,7 +83,6 @@ def test_start_and_end():
 
 # Test if event starts today but ends later
 def test_ends_later():
-
     # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # Pick two random dates
@@ -127,7 +104,6 @@ def test_ends_later():
 
 # Test if event started on an earlier date but ends today
 def test_started_earlier():
-
     # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # pick two random dates
@@ -148,7 +124,6 @@ def test_started_earlier():
 
 # Test if no event is scheduled for today
 def test_no_event():
-
     # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # pick two random dates
@@ -170,6 +145,8 @@ def test_no_event():
 """
 TESTING TIME CONVERSION
 """
+
+
 # returns a datetime object with a random time
 def random_time():
     # get a random hour and minute value
@@ -191,7 +168,6 @@ def to_12hour(d):
 
 # Testing the conversion function in file
 def test_time_conversion():
-    
     # Iterate test NUM_ITER times
     for i in range(NUM_ITER):
         # get random time
@@ -202,9 +178,12 @@ def test_time_conversion():
 
         assert convert_to_12(str_time) == to_12hour(time)
 
+
 """
 TESTING get date function
 """
+
+
 def test_get_date():
     assert str(datetime.date.today()).split()[0] == get_date('today')
     assert str(datetime.date.today() + datetime.timedelta(days=1)).split()[0] == get_date('tomorrow')
@@ -212,5 +191,3 @@ def test_get_date():
     assert str(datetime.date.today() - datetime.timedelta(days=1)).split()[0] == get_date('-1')
     assert str(datetime.date.today() + datetime.timedelta(days=1)).split()[0] == get_date('1')
     assert str(datetime.date.today()).split()[0] == get_date(datetime.date.today().strftime("%m/%d/%y"))
-
-

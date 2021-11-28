@@ -1,15 +1,10 @@
 import os
-import csv
-import discord
-import pandas as pd
-import tempfile
-from discord import Attachment
-from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
-from Event import Event
-from parse.match import parse_period
-from icalendar import Calendar
 
-import fnmatch
+import pandas as pd
+from Event import Event
+from functionality.shared_functions import create_event_tree, add_event_to_file
+from icalendar import Calendar
+from parse.match import parse_period
 
 
 def verify_csv(data):
@@ -56,7 +51,7 @@ def convert_time(old_str):
 
     new_str = old_str[5:7] + '/' + old_str[8:10] + '/' + old_str[2:4] + ' '
 
-    if(len(old_str)==10): #Doesn't include hours/minutes
+    if len(old_str) == 10:  # Doesn't include hours/minutes
         return new_str + "12:00 am"
 
     hour_int = int(old_str[11:13])
@@ -102,12 +97,12 @@ def get_ics_data(calendar):
         if component.name == "VEVENT":
             print("Adding Event....")
             data = data.append({'ID': '',
-                         'Name': component.get('summary'),
-                         'Start Date': str(component.get('dtstart').dt),
-                         'End Date': str(component.get('dtend').dt),
-                         'Priority': '3',
-                         'Type': '',
-                         'Notes': component.get('description')}, ignore_index=True)
+                                'Name': component.get('summary'),
+                                'Start Date': str(component.get('dtstart').dt),
+                                'End Date': str(component.get('dtend').dt),
+                                'Priority': '3',
+                                'Type': '',
+                                'Notes': component.get('description')}, ignore_index=True)
 
     return data
 

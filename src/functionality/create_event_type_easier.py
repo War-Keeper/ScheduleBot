@@ -1,12 +1,10 @@
-import re
-import os
 import csv
-from datetime import datetime
-from types import TracebackType
-from src.event_type import event_type
-from src.functionality.shared_functions import create_type_directory, create_type_file
-from src.functionality.shared_functions import load_key, decrypt_file, encrypt_file
+import os
 import traceback
+from datetime import datetime
+from event_type import event_type
+from functionality.shared_functions import create_type_directory, create_type_file
+from functionality.shared_functions import load_key, decrypt_file, encrypt_file
 
 
 async def create_event_type(ctx, client, event_msg, hr_min_array):

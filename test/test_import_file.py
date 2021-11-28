@@ -10,7 +10,6 @@ import discord.ext.commands as commands
 import discord.ext.test as test
 import threading
 from icalendar import Calendar
-import time
 from schedulebot import importfile
 from functionality.import_file import verify_csv, convert_time, import_file, get_ics_data
 

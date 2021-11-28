@@ -1,5 +1,6 @@
-import re
 import datetime
+import re
+
 from functionality.shared_functions import read_event_file, create_event_tree
 
 
@@ -112,7 +113,6 @@ def get_date(arg):
         return str(datetime.date.today()).split()[0]
     else:
         return None
-
 
 
 def check_start_or_end(dates, today):

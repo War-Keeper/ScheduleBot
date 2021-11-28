@@ -1,14 +1,8 @@
-import re
-import datetime
+import io
 import discord
-from discord import Client
-from discord.ext import commands
-from src.functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.dates as mdates
-from datetime import datetime
-import io
+from functionality.shared_functions import read_event_file, create_event_tree
 
 async def retrieve_event(ctx, client):
     """
@@ -65,7 +59,7 @@ async def retrieve_event(ctx, client):
             for e in events:
                 time.append(e['startTime'])
                 time.append(e['endTime'])
-                status.append("Start of "+e['name'])
+                status.append("Start of " + e['name'])
                 status.append("End of " + e['name'])
 
         # Choose some nice levels

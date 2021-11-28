@@ -4,7 +4,7 @@ from Event import Event
 from parse.match import parse_period
 from functionality.create_event_type import create_event_type
 
-from src.parse.match import parse_period24
+from parse.match import parse_period24
 
 
 def check_complete(start, start_date, end, end_date, array):

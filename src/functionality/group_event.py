@@ -1,12 +1,12 @@
-import discord
-
-from src.functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
 from types import TracebackType
-from src.Event import Event
-from src.parse.match import parse_period
-from src.functionality.create_event_type import create_event_type
-from src.functionality.AddEvent import check_complete
-from src.parse.match import parse_period24
+
+import discord
+from Event import Event
+from functionality.AddEvent import check_complete
+from functionality.create_event_type import create_event_type
+from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, turn_types_to_string
+from parse.match import parse_period
+from parse.match import parse_period24
 
 
 def check_complete(start, start_date, end, end_date, array):
@@ -74,7 +74,7 @@ async def add_event2(ctx, client):
 
         # print(" yesa  " + str(msg_content))
         if msg_content.__contains__("am") or msg_content.__contains__("pm") or msg_content.__contains__ \
-                ("AM") or msg_content.__contains__("PM"):
+                    ("AM") or msg_content.__contains__("PM"):
             try:
                 parse_result = parse_period(msg_content)
             except Exception as e:
@@ -105,7 +105,7 @@ async def add_event2(ctx, client):
                 msg_content = ""
 
         # 24hr format
-        elif  msg_content.__contains__("exit") or  msg_content.__contains__("quit"):
+        elif msg_content.__contains__("exit") or msg_content.__contains__("quit"):
             return None
         else:
             try:
@@ -126,7 +126,6 @@ async def add_event2(ctx, client):
             # print("Lets see it now " + str(parse_result))
             start_date = parse_result[0]
             end_date = parse_result[1]
-
 
             # If both datetime objects were successfully created, they get appended to the list and exits the while loop
             if not (event_dates := check_complete(start_complete, start_date, end_complete, end_date, event_array)):
@@ -205,6 +204,7 @@ async def add_event2(ctx, client):
 
     return event_array
 
+
 async def group_event(ctx, client, user, emoji):
     """
     Function:
@@ -242,6 +242,7 @@ async def group_event(ctx, client, user, emoji):
 
     return arr
 
+
 async def add_others_event(user, event_array):
     """
     Function:
@@ -269,4 +270,3 @@ async def add_others_event(user, event_array):
         await user.send(
             "There was an error creating your event. Make sure your formatting is correct and try creating the event again."
         )
-

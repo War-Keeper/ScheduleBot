@@ -1,10 +1,7 @@
-import re
-import datetime
 import discord
-from discord import Client
-from discord.ext import commands
-from src.functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file
-from src.functionality.highlights import convert_to_12
+from functionality.highlights import convert_to_12
+from functionality.shared_functions import read_event_file, create_event_tree, delete_event_from_file
+
 
 async def delete_event(ctx, client):
     """
@@ -48,14 +45,14 @@ async def delete_event(ctx, client):
             event['endTime'] = convert_to_12(end[1][:-3])  # Convert to 12 hour format
             event['type'] = row[4]
             event['desc'] = row[5]
-            #dates = [event['startDate'], event['endDate']]
+            # dates = [event['startDate'], event['endDate']]
 
             events.append(event)
 
             # reset event
             event = {'name': '', 'startDate': '', 'startTime': '', 'endDate': '', 'endTime': '', 'type': '', 'desc': ''}
 
-        #find all the existing schedules and display them
+        # find all the existing schedules and display them
         if len(events) != 0:
             for e in events:
                 embed = discord.Embed(colour=discord.Colour.dark_red(), timestamp=ctx.message.created_at,
@@ -67,14 +64,14 @@ async def delete_event(ctx, client):
                 embed.add_field(name="Event Type:", value=e['type'], inline=False)
                 embed.add_field(name="Description:", value=e['desc'], inline=False)
                 await ctx.send(embed=embed)
-                #await channel.send(f"You have {e['name']} scheduled , from {e['startTime']} to {e['endTime']}")
+                # await channel.send(f"You have {e['name']} scheduled , from {e['startTime']} to {e['endTime']}")
         else:
             await channel.send("You don't have any event scheduled..!!")
     else:
         eventFlag = True
         await channel.send("Looks like your schedule is empty. You can add events using the '!schedule' command!")
 
-    #delete the event and event type
+    # delete the event and event type
     if not eventFlag:
         await channel.send("Please enter the name of the event you want to delete")
         event_msg = await client.wait_for("message", check=check)  # Waits for user input
@@ -88,12 +85,9 @@ async def delete_event(ctx, client):
                 if e['name'].lower() == event_msg.lower():
                     to_remove.append(e)
                     print("Attempting to delete")
-                    print("Row to be deleted "+e.__str__())
+                    print("Row to be deleted " + e.__str__())
                     delete_event_from_file(str(ctx.author.id), e)
                     print("Deleted")
                     await channel.send(f"The event: {e['name']} was deleted..!!")
                 else:
                     print("The entered event name does not exists..!! Please try again")
-
-
-

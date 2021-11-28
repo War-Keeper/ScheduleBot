@@ -2,12 +2,10 @@ import math
 import traceback
 from calendar import monthrange
 from datetime import datetime
-
+from Event import Event
 from discord_components import Select, SelectOption
-
-from src.Event import Event
-from src.functionality.create_event_type_easier import create_event_type
-from src.functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, \
+from functionality.create_event_type_easier import create_event_type
+from functionality.shared_functions import create_event_tree, create_type_tree, add_event_to_file, \
     turn_types_to_string
 
 BOT = None

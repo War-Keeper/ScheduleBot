@@ -1,9 +1,7 @@
-import os
-import re
 import csv
-from pathlib import Path
-from types import TracebackType
+import os
 from functionality.export_file import load_key, encrypt_file, decrypt_file
+
 
 def delete_type(rows, msg_content):
     """
@@ -17,17 +15,18 @@ def delete_type(rows, msg_content):
     Output:
         - A existing event type is deleted from the user's calendar file 
     """
-    flag=0
+    flag = 0
     line_number = 0
-    new_row=[]
+    new_row = []
     for line in rows:
-        if str(line[0]) == msg_content :
-            flag=1
+        if str(line[0]) == msg_content:
+            flag = 1
         else:
             new_row.append(line)
-            line_number+=1
-    temp=[new_row, flag, line_number]
+            line_number += 1
+    temp = [new_row, flag, line_number]
     return temp
+
 
 def print_type(calendar_lines):
     """
@@ -40,15 +39,16 @@ def print_type(calendar_lines):
     Output:
         -  Sends the lsit of all event types as list and string
     """
-    list_types=''
+    list_types = ''
     rows = []
-    #print (calendar_lines)
+    # print (calendar_lines)
     for line in calendar_lines:
 
         if len(line) > 0:
             rows.append(line)
-            list_types= list_types + "\nEvent Type: " + str(line[0]) + " prefered time range from " + str(line[1]) +" to " +str(line[2])
-    temp1= [rows, str(list_types)]
+            list_types = list_types + "\nEvent Type: " + str(line[0]) + " prefered time range from " + str(
+                line[1]) + " to " + str(line[2])
+    temp1 = [rows, str(list_types)]
     return temp1
 
 
@@ -69,10 +69,11 @@ async def delete_event_type(ctx, client):
     channel = await ctx.author.create_dm()
     print(ctx.author.id)
     key = load_key(str(ctx.author.id))
+
     def check(m):
         return m.content is not None and m.channel == channel and m.author == ctx.author
 
-    filename =str(ctx.author.id) + "event_types"
+    filename = str(ctx.author.id) + "event_types"
     try:
 
         # Checks if the calendar csv file exists
@@ -80,22 +81,23 @@ async def delete_event_type(ctx, client):
             await channel.send("You have not created any events type yet!!")
         else:
             # Decrypt the file
-            decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
+            decrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(
+                ctx.author.id) + "event_types" + ".csv")
             dec = True
             # Opens the current user's csv calendar file
             with open(
-                os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "r"
+                    os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "r"
             ) as calendar_lines:
                 calendar_lines = csv.reader(calendar_lines, delimiter=",")
                 fields = next(calendar_lines)  # The column headers will always be the first line of the csv file
-                
-                new_row=[]
-                #printing the list of event type
-                temp1=print_type(calendar_lines)
-                rows = temp1[0]
-                list_types=temp1[1]
 
-                if list_types=='':
+                new_row = []
+                # printing the list of event type
+                temp1 = print_type(calendar_lines)
+                rows = temp1[0]
+                list_types = temp1[1]
+
+                if list_types == '':
                     await channel.send("You have not created any events type yet!!")
                 else:
                     await channel.send("List of your available events types are:" + list_types)
@@ -107,36 +109,39 @@ async def delete_event_type(ctx, client):
                     msg_content = str(event_msg.content)
 
                     # Searching and deleting the event type
-                    temp= delete_type(rows, msg_content)
-                    new_row=temp[0]
-                    flag= temp[1]
+                    temp = delete_type(rows, msg_content)
+                    new_row = temp[0]
+                    flag = temp[1]
                     line_number = temp[2]
-                
-                    if flag==0:
-                        await channel.send("Event type does not exist")
-                    if flag==1:
-                        await channel.send("Event type " + msg_content +" has been deleted.")
 
-                 # Open current user's calendar file for writing
+                    if flag == 0:
+                        await channel.send("Event type does not exist")
+                    if flag == 1:
+                        await channel.send("Event type " + msg_content + " has been deleted.")
+
+                # Open current user's calendar file for writing
                 with open(
-                    os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "w", newline=""
+                        os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(filename) + ".csv", "w",
+                        newline=""
                 ) as calendar_file:
                     # Write to column headers and array of rows back to the calendar file
                     csvwriter = csv.writer(calendar_file)
-               # print (str(fields))
-               # print (str(new_row))
+                    # print (str(fields))
+                    # print (str(new_row))
                     csvwriter.writerow(fields)
                     if line_number > 1:
                         csvwriter.writerows(new_row)
                     elif line_number == 1:
                         csvwriter.writerow(new_row[0])
-            encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
+            encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(
+                ctx.author.id) + "event_types" + ".csv")
     except Exception as e:
         # Outputs an error message if the event could not be created
         print(e)
 
         if dec:
-            encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(ctx.author.id) + "event_types" + ".csv")
+            encrypt_file(key, os.path.expanduser("~/Documents") + "/ScheduleBot/Type/" + str(
+                ctx.author.id) + "event_types" + ".csv")
         await channel.send(
             "There was an error deleting your event."
         )
