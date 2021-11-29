@@ -183,7 +183,7 @@ If you want to see a consolidated timeline of all the events that you have sched
   
 ## Releases
 
--   [All releases](https://github.com/qchen59/ScheduleBot/releases)
+-   [All releases](https://github.com/War-Keeper/ScheduleBot/releases)
 -   [v1.1](https://github.com/lyonva/ScheduleBot/releases/tag/v1.1): First functional release
 -   [v2.0](https://github.com/qchen59/ScheduleBot/releases/tag/v2.0.0): First version 2 release with import/export events function, find available time feature, also supports 24 hour time format and event priority.
 -   [v2.1](https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
@@ -232,7 +232,7 @@ At startup, the bot now sends an on_ready welcome message to all servers the bot
 
 ## Getting involved
 
-Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/qchen59/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/qchen59/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/qchen59/ScheduleBot/projects/1), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
+Thank you for caring for this project and getting involved. To start, please check out [contributing](https://github.com/War-Keeper/ScheduleBot/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/War-Keeper/ScheduleBot/blob/main/CODE_OF_CONDUCT.md). For more technical detail of implementation of code, you can check out the documentation. When you want to get your hands on the project, take a peek into the [github project](https://github.com/War-Keeper/ScheduleBot/projects), assign yourself a task, move it to To-Do, and convert it into an issue and assign it to yourself.
 
 Check out the [internal documentation](https://htmlpreview.github.io/?https://github.com/qchen59/ScheduleBot/blob/main/docs/src/index.html) if you want to contribute or find out about the inner workings of ScheduleBot.
 
