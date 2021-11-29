@@ -43,6 +43,7 @@ async def help(ctx):
     em.add_field(name="help", value="Displays all commands and their descriptions", inline=False)
     em.add_field(name="schedule", value="Creates an event", inline=False)
     em.add_field(name="schedulebutton", value="Creates an event using buttons", inline=False)
+    em.add_field(name="groupevent", value="Create a group event that anyone can subscribe to, found in the General text server", inline=False)
     em.add_field(name="freetime", value="Displays when you are available today", inline=False)
     em.add_field(name="day", value="Shows everything on your schedule for a specific date\nHere is the format you "
                                    "should follow:\n!day "
