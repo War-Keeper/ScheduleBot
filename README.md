@@ -67,6 +67,16 @@ The bot will ask you the details of your new event and create the message.
 
 ![Group Schedule](docs/img/GroupSched.JPG)
 
+### **Scheduling an event using buttons** ###
+
+Don't feel like typing? Want the bot to handle most of the work? Try DM'ing the bot the command:
+
+```
+!schedulebutton
+```
+
+The bot will ask you the name of your event, but the rest of the interactions can be handled via buttons. This provides a faster alternative to the typical schedule command.
+
 ### **I forgot my agenda for the day**
 
 You can take a look at your events scheduled for a specfic date with the command:
