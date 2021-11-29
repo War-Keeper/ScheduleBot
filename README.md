@@ -252,7 +252,7 @@ The bot can schedule meetings with multiple people, checking when they have a ho
 The bot could function as a when2meet to vote on potential meeting times
 Bot reminds everyone of meetings.
 
-##Redesign bot to use Javascript
+### Redesign bot to use Javascript
 Since the python discord bot is deprecated, it would be necessary to re-implement using javascript.
 
 ### Suggest event removals
