@@ -82,6 +82,7 @@ async def help(ctx):
     em.add_field(name=&#34;exportfile&#34;, value=&#34;Exports a CSV file of your events&#34;, inline=False)
     em.add_field(name=&#34;importfile&#34;, value=&#34;Import events from a CSV or ICS file&#34;, inline=False)
     em.add_field(name=&#34;editevent&#34;, value=&#34;Edits the event with the new information&#34;, inline=False)
+    em.add_field(name=&#34;retrieveevent&#34;, value=&#34;Retrieves all the events scheduled for the user in the form of a timeline&#34;, inline=False)
     await ctx.send(embed=em)
 
 
