@@ -37,7 +37,7 @@ To get a list of commands, DM the bot the command:
 
 The bot will reply back you with the list of available commands.
 
-<img width="481" alt="Screen Shot 2021-11-03 at 10 15 04 PM" src="https://user-images.githubusercontent.com/34405372/140246210-6e0f176e-bb49-47ad-88d4-0b9f04ae073d.png">
+<img width="481" alt="Screen Shot 2021-11-03 at 10 15 04 PM" src="https://github.com/War-Keeper/ScheduleBot/blob/main/docs/img/help.png">
 
 
 ### **Scheduling an event**
