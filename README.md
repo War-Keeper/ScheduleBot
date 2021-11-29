@@ -121,12 +121,12 @@ When you look for available times, you now can use `!find` to find only the avai
 ![Find Available times](docs/img/find.gif)
 
 ### Want to update the schedule ? Edit the event
-When you want to reschedule the event or change event name, description, priority or type, you can use '!editevent' to update the schedule.
+When you want to reschedule the event or change event name, description, priority or type, you can use `!editevent` to update the schedule.
 
 ![Edit an event](docs/img/editevent.gif)
 
 ### Not planning on attending ? Delete the event
-When you want are not going to attend the event, you can use '!deleteevent' to cancel the appointment schedule
+When you want are not going to attend the event, you can use `!deleteevent` to cancel the appointment schedule
 
 ![Delete an event](https://github.com/War-Keeper/ScheduleBot/blob/main/docs/img/deleteEventSchedule.gif)
 
