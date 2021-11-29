@@ -54,6 +54,19 @@ The bot will ask you the details of your new event.
 
 ![Schedule](docs/img/!schedul.gif)
 
+### **Scheduling an event for Groups**
+
+Create an Event that is shared with multiple anyone that wants to join the Event. A post will be created in the General channel and anyone can join the Event by clicking on the emoji under it.
+To schedule a new group event, just DM the bot and follow the same steps as scheduling a new event:
+
+```
+!groupevent
+```
+
+The bot will ask you the details of your new event and create the message.
+
+![Group Schedule](docs/img/GroupSched.JPG)
+
 ### **I forgot my agenda for the day**
 
 You can take a look at your events scheduled for a specfic date with the command:
