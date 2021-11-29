@@ -5,9 +5,9 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5732742.svg)](https://doi.org/10.5281/zenodo.5732742)
 [![Build Status](https://app.travis-ci.com/qchen59/ScheduleBot.svg?branch=main)](https://app.travis-ci.com/github/qchen59/ScheduleBot)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qchen59/ScheduleBot)
-[![GitHub issues](https://img.shields.io/github/issues/qchen59/ScheduleBot)](https://github.com/qchen59/ScheduleBot/issues)
-[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/qchen59/ScheduleBot?include_prereleases)](https://github.com/qchen59/ScheduleBot/releases)
-[![GitHub all releases](https://img.shields.io/github/downloads/qchen59/ScheduleBot/total)](https://github.com/qchen59/ScheduleBot/releases)
+[![GitHub issues](https://img.shields.io/github/issues/qchen59/ScheduleBot)](https://github.com/War-Keeper/ScheduleBot/issues)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/qchen59/ScheduleBot?include_prereleases)](https://github.com/War-Keeper/ScheduleBot/releases)
+[![GitHub all releases](https://img.shields.io/github/downloads/qchen59/ScheduleBot/total)](https://github.com/War-Keeper/ScheduleBot/releases)
 [![Platform](https://img.shields.io/badge/platform-discord-blue)](https://discord.com/)
 [![codecov](https://codecov.io/gh/War-Keeper/ScheduleBot/branch/main/graph/badge.svg?token=25984f2e-c35c-4599-82e5-c7a24b358d31)](https://codecov.io/gh/War-Keeper/ScheduleBot)
 
