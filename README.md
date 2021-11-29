@@ -74,6 +74,7 @@ Don't feel like typing? Want the bot to handle most of the work? Try DM'ing the 
 ```
 !schedulebutton
 ```
+![Schedule_Button](docs/img/!schedulebutton.gif)
 
 The bot will ask you the name of your event, but the rest of the interactions can be handled via buttons. This provides a faster alternative to the typical schedule command.
 
