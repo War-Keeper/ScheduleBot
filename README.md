@@ -240,12 +240,20 @@ Check out the [internal documentation](https://htmlpreview.github.io/?https://gi
 
 These are example features that could be added to ScheduleBot in the future.
 
-### Delete event
-Delete the event you don't want anymore:
+### Refactor code into 3-layer infrastructure
+Database: Make functions or objects to write to our different files
+Controller: Most of the program's logic, parsing, and finding out time slots
+UI: The bot itself, interactions with the user.
 
-```
-!eventdelete
-```
+### Server functionality
+A huge addition would be that the bot can interact inside a server. For example:
+
+The bot can schedule meetings with multiple people, checking when they have a hole in their schedule
+The bot could function as a when2meet to vote on potential meeting times
+Bot reminds everyone of meetings.
+
+##Redesign bot to use Javascript
+Since the python discord bot is deprecated, it would be necessary to re-implement using javascript.
 
 ### Suggest event removals
 When Your entire day is scheduled
@@ -253,12 +261,6 @@ You have event 1 of priority 4
 You try to find time for another event of priority 3
 ScheduleBot should say there is no time, but can suggest replacing event 1 as it has less priority.
 
-### Edit event
-You can edit the event you created:
-
-```
-!eventedit
-```
 
 ### Quick event creation
 
