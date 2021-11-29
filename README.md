@@ -56,14 +56,14 @@ The bot will ask you the details of your new event.
 
 ### **Scheduling an event for Groups**
 
-Create an Event that is shared with multiple anyone that wants to join the Event. A post will be created in the General channel and anyone can join the Event by clicking on the emoji under it.
+Create an event shared with anyone who wants to join the event. A post will be created in the general channel and anyone can join the event by clicking on the emoji underneath it.
 To schedule a new group event, just DM the bot and follow the same steps as scheduling a new event:
 
 ```
 !groupevent
 ```
 
-The bot will ask you the details of your new event and create the message.
+The bot will ask you for the details of your new event and create the message.
 
 ![Group Schedule](docs/img/GroupSched.JPG)
 
@@ -145,12 +145,12 @@ When you look for available times, you now can use `!find` to find only the avai
 ![Find Available times](docs/img/find.gif)
 
 ### Want to update the schedule ? Edit the event
-When you want to reschedule the event or change event name, description, priority or type, you can use `!editevent` to update the schedule.
+When you want to reschedule the event or change event name, description, priority or type, you can use `!editevent` to update the event schedule.
 
 ![Edit an event](docs/img/editevent.gif)
 
 ### Not planning on attending ? Delete the event
-When you want are not going to attend the event, you can use `!deleteevent` to cancel the appointment schedule
+If you need to cancel an event, or just don't need it on your schedule anymore, you can use `!deleteevent` to remove it.
 
 ![Delete an event](https://github.com/War-Keeper/ScheduleBot/blob/main/docs/img/deleteEventSchedule.gif)
 
