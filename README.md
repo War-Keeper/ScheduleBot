@@ -184,11 +184,14 @@ If you want to see a consolidated timeline of all the events that you have sched
   
 ## Releases
 
--   [All releases](https://github.com/War-Keeper/ScheduleBot/releases)
--   [v1.1](https://github.com/lyonva/ScheduleBot/releases/tag/v1.1): First functional release
--   [v2.0](https://github.com/qchen59/ScheduleBot/releases/tag/v2.0.0): First version 2 release with import/export events function, find available time feature, also supports 24 hour time format and event priority.
--   [v2.1](https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
-
+- [All releases](https://github.com/War-Keeper/ScheduleBot/releases)
+- [v1.1](https://github.com/lyonva/ScheduleBot/releases/tag/v1.1): First functional release
+- [v2.0](https://github.com/qchen59/ScheduleBot/releases/tag/v2.0.0): First version 2 release with import/export events function, find available time feature, also supports 24 hour time format and event priority.
+- [v2.1](https://github.com/qchen59/ScheduleBot/releases/tag/v2.1.0): Finalized version 2, check what's new in V2
+- [v3.0.0](https://github.com/War-Keeper/ScheduleBot/releases/tag/v3.0.0): New Project Release
+- [v3.1.0](https://github.com/War-Keeper/ScheduleBot/releases/tag/v3.1.0): Added the edit and delete functions. Also refactoring some files for ease of use.
+- [v3.2.0](https://github.com/War-Keeper/ScheduleBot/releases/tag/v3.2.0): Added a faster way to create an event using buttons, is created as a separate command. Added a group event creation command that creates an even like normal and then creates a post in general that will allow anyone to add that event to their schedule too.
+- [v3.3.0](https://github.com/War-Keeper/ScheduleBot/releases/tag/v3.3.0): Final Release
 # What's new in V2:
 
 Please note that this is not an exhaustive list, however it does include all major improvements. For a complete list of all changes and bug fixes, please see our closed github issues or commit history.
@@ -230,6 +233,8 @@ At startup, the bot now sends an on_ready welcome message to all servers the bot
 #### Fixed bugs related to finding freetime
 
 !freetime function was not working under certain circumstances, such as when there was only one event in the schedule. This has been fixed in the latest version.
+# What's new in V3:
+List of Changes//Improvements are stored in the doc folder, and can be found in the [Changes_for_Project3](https://github.com/War-Keeper/ScheduleBot/blob/main/docs/src/Changes_for_Project3.md) file.
 
 ## Getting involved
 
