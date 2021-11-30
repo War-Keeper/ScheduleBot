@@ -1,8 +1,14 @@
+# Project 3 description and changes video
+## click on the video to play
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/FnJ8C9iSjqY/0.jpg)](https://www.youtube.com/watch?v=FnJ8C9iSjqY "Project 3 description and changes video")
+
+
 ![ScheduleBot logo](https://raw.githubusercontent.com/lyonva/ScheduleBot/main/docs/img/banner.png)
 
 ![Python v3.9](https://img.shields.io/badge/python-v3.9-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5732742.svg)](https://doi.org/10.5281/zenodo.5732742)
+[![DOI](https://zenodo.org/badge/426848270.svg)](https://zenodo.org/badge/latestdoi/426848270)
 ![Build Status](https://github.com/War-Keeper/ScheduleBot/actions/workflows/python-app.yml/badge.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/War-Keeper/ScheduleBot)
 [![GitHub issues](https://img.shields.io/github/issues/War-Keeper/ScheduleBot)](https://github.com/War-Keeper/ScheduleBot/issues)
@@ -18,10 +24,6 @@
 
 https://user-images.githubusercontent.com/34405372/139776326-722e8526-4977-4ffd-b00e-c86a8fd5f706.mp4
 
-# Project 3 description and changes video
-## click on the video to play
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/FnJ8C9iSjqY/0.jpg)](https://www.youtube.com/watch?v=FnJ8C9iSjqY "Project 3 description and changes video")
 
 ScheduleBot is a Python application that helps you calendarize events and work through a Discord bot. Want to try it out? Simply follow the steps outlined in the [For Developers](#For-Developers) section. ScheduleBot can be configured to run on your Discord server by adding just one line of code!
 
