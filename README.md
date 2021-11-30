@@ -3,7 +3,7 @@
 ![Python v3.9](https://img.shields.io/badge/python-v3.9-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5732742.svg)](https://doi.org/10.5281/zenodo.5732742)
-[![Build Status](https://app.travis-ci.com/War-Keeper/ScheduleBot.svg?branch=main)](https://app.travis-ci.com/github/War-Keeper/ScheduleBot)
+![Build Status](https://github.com/War-Keeper/ScheduleBot/actions/workflows/python-app.yml/badge.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/War-Keeper/ScheduleBot)
 [![GitHub issues](https://img.shields.io/github/issues/War-Keeper/ScheduleBot)](https://github.com/War-Keeper/ScheduleBot/issues)
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/War-Keeper/ScheduleBot?include_prereleases)](https://github.com/War-Keeper/ScheduleBot/releases)
