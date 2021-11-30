@@ -18,7 +18,8 @@
 
 https://user-images.githubusercontent.com/34405372/139776326-722e8526-4977-4ffd-b00e-c86a8fd5f706.mp4
 
-#Project 3 description and changes video
+# Project 3 description and changes video
+## click on the video to play
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/FnJ8C9iSjqY/0.jpg)](https://www.youtube.com/watch?v=FnJ8C9iSjqY "Project 3 description and changes video")
 
